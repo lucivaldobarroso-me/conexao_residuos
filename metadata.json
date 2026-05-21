@@ -1,0 +1,8 @@
+{
+  "name": "Conexão Resíduos em Saúde",
+  "description": "Guia digital interativo para classificação, manejo e descarte seguro de resíduos de saúde (RSS), focado em biossegurança e eficiência institucional.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
