@@ -173,17 +173,18 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectGroup, onOpenManua
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-[28px] border border-primary/10 bg-white shadow-xl shadow-surface-container-highest/30 md:rounded-[32px]">
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(320px,0.86fr)]">
-          <div className="min-w-0 p-5 md:p-8">
+      <section className="relative overflow-hidden rounded-[28px] border border-primary/10 bg-white p-5 shadow-xl shadow-surface-container-highest/30 md:rounded-[32px] md:p-8">
+        <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-primary md:block" />
+        <div className="relative grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
+          <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary">
               <Trophy size={14} />
               {quiz.eyebrow}
             </div>
-            <h2 className="max-w-xl text-2xl font-black leading-tight text-on-surface sm:text-3xl md:text-[2.4rem]">
+            <h2 className="max-w-2xl text-2xl font-black leading-tight text-on-surface sm:text-3xl md:text-4xl">
               {quiz.title}
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-on-surface-variant">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-on-surface-variant">
               {quiz.desc}
             </p>
 
@@ -211,8 +212,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectGroup, onOpenManua
             </button>
           </div>
 
-          <div className="bg-primary p-5 text-white md:p-8">
-            <div className="mx-auto max-w-sm rounded-[28px] bg-white/10 p-5 backdrop-blur">
+          <div className="relative rounded-[24px] bg-primary p-5 text-white md:rounded-[28px] md:bg-white/10 md:p-6 md:backdrop-blur">
             <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-primary shadow-xl shadow-black/10">
               <GraduationCap size={34} />
             </div>
@@ -227,7 +227,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectGroup, onOpenManua
                 <p className="text-3xl font-black">Top</p>
                 <p className="text-xs font-bold uppercase tracking-widest">Ranking</p>
               </div>
-            </div>
             </div>
           </div>
         </div>
