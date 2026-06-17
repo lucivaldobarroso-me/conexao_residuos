@@ -31,12 +31,12 @@ const translations = {
     dateFormat: 'en-US'
   },
   es: {
-    title: 'Historial de Actividades',
-    subtitle: 'Siga sus últimas interacciones y consultas de protocolos en el sistema.',
-    clearBtn: 'Limpiar Historial',
-    openBtn: 'Ver otra vez',
+    title: 'Historial de actividades',
+    subtitle: 'Consulte sus últimas interacciones, búsquedas y accesos a los protocolos del sistema.',
+    clearBtn: 'Limpiar historial',
+    openBtn: 'Ver nuevamente',
     emptyTitle: 'No se encontró historial',
-    emptyDesc: 'Sus actividades aparecerán aquí a medida que navegue por los protocolos y complete desafíos.',
+    emptyDesc: 'Sus actividades aparecerán aquí a medida que navegue por los protocolos y complete los desafíos.',
     dateFormat: 'es-ES'
   }
 };
@@ -67,7 +67,7 @@ export const History: React.FC<HistoryProps> = ({ entries, onClear, onOpenEntry,
         {entries.length > 0 && (
           <button 
             onClick={onClear}
-            className="flex items-center gap-2 px-4 py-2 border border-red-200 text-red-600 rounded-xl hover:bg-red-50 transition-all font-bold text-sm"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 px-4 py-3 text-sm font-bold text-red-600 transition-all hover:bg-red-50 sm:w-auto sm:py-2"
           >
             <Trash2 size={16} />
             {t.clearBtn}
@@ -100,9 +100,9 @@ export const History: React.FC<HistoryProps> = ({ entries, onClear, onOpenEntry,
                         <Icon size={24} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-4 mb-1">
-                          <h4 className="font-bold text-on-surface truncate">{entry.action}</h4>
-                          <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest whitespace-nowrap flex items-center gap-1">
+                        <div className="mb-1 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                          <h4 className="font-bold text-on-surface sm:truncate">{entry.action}</h4>
+                          <span className="flex items-center gap-1 whitespace-nowrap text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
                             <CalendarDays size={12} />
                             {formatDate(entry.timestamp)}
                           </span>
@@ -130,7 +130,7 @@ export const History: React.FC<HistoryProps> = ({ entries, onClear, onOpenEntry,
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="py-20 flex flex-col items-center text-center px-6 bg-surface-container-low rounded-[40px] border-2 border-dashed border-outline-variant"
+              className="flex flex-col items-center rounded-[28px] border-2 border-dashed border-outline-variant bg-surface-container-low px-6 py-16 text-center md:rounded-[40px] md:py-20"
             >
               <div className="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mb-6">
                 <Clock size={40} />

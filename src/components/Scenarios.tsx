@@ -1,118 +1,264 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { SCENARIOS } from '../constants';
-import { CheckCircle2, XCircle, AlertCircle, Info } from 'lucide-react';
-import { Language } from '../types';
+import { CheckCircle2, XCircle, AlertCircle, Info, SlidersHorizontal } from 'lucide-react';
+import { Language, WasteGroup } from '../types';
 
 interface ScenariosProps {
   onViewScenario: (title: string) => void;
   language: Language;
 }
 
+const groupColors: Record<WasteGroup, string> = {
+  A: 'bg-waste-a text-white',
+  B: 'bg-waste-b text-white',
+  C: 'bg-waste-c text-white',
+  D: 'bg-waste-d text-white',
+  E: 'bg-waste-e text-on-surface',
+};
+
 const translations = {
   pt: {
     title: 'Cenários Práticos',
-    subtitle: 'Situações reais do cotidiano hospitalar e a conduta recomendada para cada caso.',
-    wrongLabel: 'Como costuma-se errar:',
-    rightLabel: 'Conduta Correta:',
+    subtitle: 'Casos rápidos do cotidiano assistencial para treinar condutas de segregação, acondicionamento e destino conforme a RDC 222/2018.',
+    wrongLabel: 'Erro comum',
+    rightLabel: 'Conduta correta',
     attention: 'Atenção:',
-    guideline: 'Este cenário baseia-se em diretrizes da RDC 222/2018 da ANVISA.'
+    guideline: 'Baseado na RDC 222/2018 e no PGRSS da unidade.',
+    all: 'Todos',
+    groupFilter: 'Grupo',
+    sectorFilter: 'Setor',
+    reference: 'Referência',
+    showing: 'casos encontrados',
+    clear: 'Limpar filtros',
   },
   en: {
     title: 'Practical Scenarios',
-    subtitle: 'Real situations from hospital daily life and the recommended conduct for each case.',
-    wrongLabel: 'Common mistakes:',
-    rightLabel: 'Correct Conduct:',
+    subtitle: 'Quick healthcare cases to train segregation, packaging, and destination decisions according to RDC 222/2018.',
+    wrongLabel: 'Common mistake',
+    rightLabel: 'Correct conduct',
     attention: 'Attention:',
-    guideline: 'This scenario is based on standard healthcare guidelines.'
+    guideline: 'Based on RDC 222/2018 and the facility PGRSS.',
+    all: 'All',
+    groupFilter: 'Group',
+    sectorFilter: 'Sector',
+    reference: 'Reference',
+    showing: 'cases found',
+    clear: 'Clear filters',
   },
   es: {
     title: 'Escenarios Prácticos',
-    subtitle: 'Situaciones reales de la vida diaria del hospital y la conducta recomendada para cada caso.',
-    wrongLabel: 'Cómo se suele errar:',
-    rightLabel: 'Conducta Correcta:',
+    subtitle: 'Casos rápidos del trabajo asistencial para entrenar la segregación, el acondicionamiento y la destinación conforme a la RDC 222/2018.',
+    wrongLabel: 'Error común',
+    rightLabel: 'Conducta correcta',
     attention: 'Atención:',
-    guideline: 'Este escenario se basa en directrices estándar de salud.'
+    guideline: 'Basado en la RDC 222/2018 y en el PGRSS de la unidad.',
+    all: 'Todos',
+    groupFilter: 'Grupo',
+    sectorFilter: 'Sector',
+    reference: 'Referencia',
+    showing: 'casos encontrados',
+    clear: 'Limpiar filtros',
   }
 };
 
 export const Scenarios: React.FC<ScenariosProps> = ({ onViewScenario, language }) => {
   const t = translations[language];
+  const scenarios = SCENARIOS[language];
+  const [selectedGroup, setSelectedGroup] = React.useState<'all' | WasteGroup>('all');
+  const [selectedSector, setSelectedSector] = React.useState('all');
 
   React.useEffect(() => {
     onViewScenario(t.title);
   }, [language]);
 
+  React.useEffect(() => {
+    setSelectedGroup('all');
+    setSelectedSector('all');
+  }, [language]);
+
+  const groupOptions = React.useMemo(() => {
+    const groups = new Set<WasteGroup>();
+    scenarios.forEach((scenario) => scenario.groups?.forEach((group) => groups.add(group)));
+    return Array.from(groups).sort();
+  }, [scenarios]);
+
+  const sectorOptions = React.useMemo(() => {
+    const sectors = new Set<string>();
+    scenarios
+      .filter((scenario) => selectedGroup === 'all' || scenario.groups?.includes(selectedGroup))
+      .forEach((scenario) => sectors.add(scenario.sector || scenario.category));
+    return Array.from(sectors).sort((a, b) => a.localeCompare(b));
+  }, [scenarios, selectedGroup]);
+
+  React.useEffect(() => {
+    if (selectedSector !== 'all' && !sectorOptions.includes(selectedSector)) {
+      setSelectedSector('all');
+    }
+  }, [selectedSector, sectorOptions]);
+
+  const filteredScenarios = scenarios.filter((scenario) => {
+    const matchesGroup = selectedGroup === 'all' || scenario.groups?.includes(selectedGroup);
+    const scenarioSector = scenario.sector || scenario.category;
+    const matchesSector = selectedSector === 'all' || scenarioSector === selectedSector;
+    return matchesGroup && matchesSector;
+  });
+
+  const clearFilters = () => {
+    setSelectedGroup('all');
+    setSelectedSector('all');
+  };
+
   return (
     <div id="scenarios-view" className="flex flex-col gap-8 pb-24 md:pb-8">
-      <header>
-        <h2 className="text-3xl font-bold tracking-tight text-on-surface mb-2">{t.title}</h2>
-        <p className="text-on-surface-variant leading-relaxed max-w-2xl">
-          {t.subtitle}
-        </p>
+      <header className="flex flex-col gap-6 border-b border-outline-variant pb-8 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-on-surface mb-2">{t.title}</h2>
+          <p className="text-on-surface-variant leading-relaxed max-w-3xl">
+            {t.subtitle}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 rounded-2xl bg-white border border-outline-variant px-4 py-3 text-sm font-bold text-on-surface-variant">
+          <SlidersHorizontal size={18} className="text-primary" />
+          {filteredScenarios.length} {t.showing}
+        </div>
       </header>
 
-      <div className="flex flex-col gap-12">
-        {SCENARIOS[language].map((scenario, index) => (
-          <motion.article
-            key={scenario.id}
-            id={`scenario-card-${scenario.id}`}
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start bg-white p-6 md:p-8 rounded-[40px] border border-outline-variant shadow-sm"
-          >
-            <div className="relative group aspect-video lg:aspect-square overflow-hidden rounded-3xl">
-              <img 
-                src={scenario.imageUrl} 
-                alt={scenario.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
-                <span className="text-xs font-bold text-primary-container mb-1 uppercase tracking-widest">{scenario.category}</span>
-                <h3 className="text-xl font-bold text-white">{scenario.title}</h3>
-              </div>
-            </div>
+      <section className="grid gap-4 rounded-[24px] bg-surface-container-low p-4 md:grid-cols-[1fr_1fr_auto] md:items-end md:rounded-[28px]">
+        <div>
+          <p className="mb-2 text-xs font-black uppercase tracking-widest text-on-surface-variant">{t.groupFilter}</p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => {
+                setSelectedGroup('all');
+                setSelectedSector('all');
+              }}
+              className={`rounded-xl px-3 py-2 text-xs font-black uppercase tracking-widest transition-all ${selectedGroup === 'all' ? 'bg-primary text-white' : 'bg-white text-on-surface-variant border border-outline-variant'}`}
+            >
+              {t.all}
+            </button>
+            {groupOptions.map((group) => (
+              <button
+                key={group}
+                onClick={() => {
+                  setSelectedGroup(group);
+                  setSelectedSector('all');
+                }}
+                className={`rounded-xl px-3 py-2 text-xs font-black uppercase tracking-widest transition-all ${selectedGroup === group ? groupColors[group] : 'bg-white text-on-surface-variant border border-outline-variant'}`}
+              >
+                Grupo {group}
+              </button>
+            ))}
+          </div>
+        </div>
 
-            <div className="flex flex-col gap-6">
-              <div className="space-y-4">
-                <div className="flex gap-4 p-5 rounded-2xl bg-red-50 border border-red-100">
-                  <XCircle className="text-red-600 shrink-0 mt-0.5" size={24} />
-                  <div>
-                    <h4 className="font-bold text-red-900 mb-1">{t.wrongLabel}</h4>
-                    <p className="text-sm text-red-800 leading-relaxed">{scenario.wrong}</p>
-                  </div>
+        <label>
+          <span className="mb-2 block text-xs font-black uppercase tracking-widest text-on-surface-variant">{t.sectorFilter}</span>
+          <select
+            value={selectedSector}
+            onChange={(event) => setSelectedSector(event.target.value)}
+            disabled={sectorOptions.length === 0}
+            className="w-full rounded-2xl border border-outline-variant bg-white px-4 py-3 text-sm font-bold text-on-surface outline-none focus:border-primary disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <option value="all">{t.all}</option>
+            {sectorOptions.map((sector) => (
+              <option key={sector} value={sector}>
+                {sector}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <button
+          onClick={clearFilters}
+          className="w-full rounded-2xl border border-outline-variant bg-white px-4 py-3 text-sm font-black text-primary transition-all hover:border-primary/40 md:w-auto"
+        >
+          {t.clear}
+        </button>
+      </section>
+
+      <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <AnimatePresence mode="popLayout">
+          {filteredScenarios.map((scenario, index) => (
+            <motion.article
+              key={scenario.id}
+              id={`scenario-card-${scenario.id}`}
+              layout
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.2, delay: index * 0.03 }}
+              className="overflow-hidden rounded-[24px] border border-outline-variant bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl md:rounded-[28px]"
+            >
+              <div className="relative h-28 overflow-hidden sm:h-36">
+                <img 
+                  src={scenario.imageUrl} 
+                  alt={scenario.title}
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-white/80">{scenario.category}</p>
+                  <h3 className="text-base font-black leading-tight text-white sm:text-lg">{scenario.title}</h3>
+                </div>
+              </div>
+
+              <div className="space-y-4 p-4 sm:p-5">
+                <div className="flex flex-wrap gap-2">
+                  {(scenario.groups || []).map((group) => (
+                    <span key={group} className={`rounded-lg px-2 py-1 text-[10px] font-black uppercase tracking-widest ${groupColors[group]}`}>
+                      Grupo {group}
+                    </span>
+                  ))}
+                  <span className="rounded-lg bg-surface-container px-2 py-1 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
+                    {scenario.sector || scenario.category}
+                  </span>
                 </div>
 
-                <div className="flex gap-4 p-5 rounded-2xl bg-green-50 border border-green-100">
-                  <CheckCircle2 className="text-green-600 shrink-0 mt-0.5" size={24} />
-                  <div>
-                    <h4 className="font-bold text-green-900 mb-1">{t.rightLabel}</h4>
-                    <p className="text-sm text-green-800 leading-relaxed">{scenario.right}</p>
+                <div className="grid gap-3">
+                  <div className="flex gap-3 rounded-2xl bg-red-50 p-4">
+                    <XCircle className="mt-0.5 shrink-0 text-red-600" size={18} />
+                    <div>
+                      <h4 className="text-xs font-black uppercase tracking-widest text-red-900">{t.wrongLabel}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-red-800">{scenario.wrong}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 rounded-2xl bg-green-50 p-4">
+                    <CheckCircle2 className="mt-0.5 shrink-0 text-green-600" size={18} />
+                    <div>
+                      <h4 className="text-xs font-black uppercase tracking-widest text-green-900">{t.rightLabel}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-green-800">{scenario.right}</p>
+                    </div>
                   </div>
                 </div>
 
                 {scenario.attention && (
-                  <div className="flex gap-3 px-5 py-3 rounded-xl bg-surface-container border border-outline-variant text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">
-                    <AlertCircle size={16} className="text-primary" />
+                  <div className="flex gap-2 rounded-xl bg-surface-container px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+                    <AlertCircle size={15} className="shrink-0 text-primary" />
                     {t.attention} {scenario.attention}
                   </div>
                 )}
-              </div>
 
-              <div className="mt-auto pt-6 border-t border-surface-container flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                  <Info size={16} />
+                <div className="border-t border-surface-container pt-4 flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Info size={15} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-on-surface-variant italic">{t.guideline}</p>
+                    {scenario.reference && (
+                      <p className="mt-1 text-[10px] font-black uppercase tracking-widest text-primary">
+                        {t.reference}: {scenario.reference}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <p className="text-xs text-on-surface-variant italic">
-                  {t.guideline}
-                </p>
               </div>
-            </div>
-          </motion.article>
-        ))}
-      </div>
+            </motion.article>
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 };

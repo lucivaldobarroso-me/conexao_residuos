@@ -34,6 +34,9 @@ export interface Scenario {
   wrong: string;
   right: string;
   attention?: string;
+  groups?: WasteGroup[];
+  sector?: string;
+  reference?: string;
 }
 
 export interface QuizQuestion {
@@ -43,6 +46,33 @@ export interface QuizQuestion {
   options: string[];
   correctAnswer: number;
   explanation: string;
+}
+
+export interface QuizParticipant {
+  id: string;
+  participantName: string;
+  profession: string;
+  cpfMask: string;
+  attemptCount: number;
+}
+
+export interface QuizLeaderboardEntry {
+  id: string;
+  participantName: string;
+  profession: string;
+  cpfMask: string;
+  score: number;
+  totalQuestions: number;
+  percentage: number;
+  durationSeconds: number;
+  completedAt: string;
+}
+
+export interface QuizStats {
+  participantCount: number;
+  attemptCount: number;
+  averagePercentage: number;
+  mostUsedQuestionCount: number | null;
 }
 
 export interface HistoryEntry {

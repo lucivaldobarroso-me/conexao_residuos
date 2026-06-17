@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, ClipboardList, BookOpen, GraduationCap, Clock, Languages, ChevronDown, Check } from 'lucide-react';
+import { Home, ClipboardList, BookOpen, GraduationCap, Clock, Info, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Language } from '../types';
 import { UI_STRINGS } from '../constants';
@@ -14,12 +14,16 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab, language, setLanguage }) => {
   const strings = UI_STRINGS[language];
   const [isLangOpen, setIsLangOpen] = React.useState(false);
+  const aboutLabel = language === 'en' ? 'About' : 'Sobre';
+  const navigationLabel = language === 'pt' ? 'Navegacao principal' : language === 'en' ? 'Main navigation' : 'Navegacion principal';
+  const languageButtonLabel = language === 'pt' ? 'Alterar idioma' : language === 'en' ? 'Change language' : 'Cambiar idioma';
   
   const navItems = [
     { id: 'dashboard', label: strings.dashboard, icon: Home },
     { id: 'groups', label: strings.groups, icon: ClipboardList },
     { id: 'scenarios', label: strings.scenarios, icon: BookOpen },
     { id: 'quiz', label: strings.quiz, icon: GraduationCap },
+    { id: 'about', label: aboutLabel, icon: Info },
     { id: 'history', label: strings.history, icon: Clock },
   ];
 
@@ -50,6 +54,10 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
         
         <div className="relative">
           <button 
+            type="button"
+            aria-label={languageButtonLabel}
+            aria-haspopup="menu"
+            aria-expanded={isLangOpen}
             onClick={() => setIsLangOpen(!isLangOpen)}
             className="flex items-center gap-2 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant/30 text-xs font-bold transition-all active:scale-95 shadow-sm"
           >
@@ -64,11 +72,15 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                role="menu"
                 className="fixed right-4 top-16 p-2 bg-white rounded-2xl border border-outline-variant shadow-2xl z-[60] w-[min(12rem,calc(100vw-2rem))]"
               >
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={language === lang.code}
                     onClick={() => {
                       setLanguage(lang.code);
                       setIsLangOpen(false);
@@ -91,7 +103,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
       </header>
 
       {/* Mobile Bottom Nav */}
-      <nav id="mobile-nav" className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around bg-surface/90 backdrop-blur-md border-t border-outline-variant py-3 px-2 md:hidden">
+      <nav id="mobile-nav" aria-label={navigationLabel} className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around bg-surface/90 backdrop-blur-md border-t border-outline-variant px-1 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] md:hidden">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;
@@ -99,16 +111,20 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
             <button
               key={item.id}
               id={`nav-mobile-${item.id}`}
+              type="button"
+              aria-label={item.label}
+              aria-current={isActive ? 'page' : undefined}
               onClick={() => setActiveTab(item.id)}
-              className={`flex flex-col items-center gap-1 transition-colors relative ${
+              className={`relative flex min-w-0 flex-1 flex-col items-center gap-1 px-1 py-1 transition-colors ${
                 isActive ? 'text-primary' : 'text-on-surface-variant'
               }`}
             >
-              <Icon size={24} className={isActive ? 'fill-primary/10' : ''} />
-              <span className="text-[10px] font-medium uppercase tracking-wider">{item.label}</span>
+              <Icon size={22} className={isActive ? 'fill-primary/10' : ''} />
+              <span className="max-w-full truncate text-[9px] font-bold uppercase tracking-wide">{item.label}</span>
               {isActive && (
                 <motion.div
                   layoutId="activeTabMobile"
+                  aria-hidden="true"
                   className="absolute -top-3 h-0.5 bg-primary w-8 rounded-full"
                 />
               )}
@@ -118,8 +134,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
       </nav>
 
       {/* Desktop Sidebar */}
-      <nav id="desktop-sidebar" className="fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-outline-variant hidden md:flex flex-col p-6 z-40 shadow-sm">
-        <div className="flex items-center gap-3 mb-10">
+      <nav id="desktop-sidebar" aria-label={navigationLabel} className="fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-outline-variant hidden md:flex flex-col p-6 z-40 shadow-sm">
+        <div className="hidden">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
             <ClipboardList size={24} />
           </div>
@@ -129,9 +145,21 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
           </div>
         </div>
 
+        <div className="mb-8 rounded-2xl border border-outline-variant bg-white p-2 shadow-sm">
+          <img
+            src="/images/site-slogan.jpg"
+            alt="Conexao Residuos - descarte consciente, saude garantida"
+            className="h-20 w-full rounded-xl object-cover"
+          />
+        </div>
+
         <div className="mb-10">
           <div className="relative">
             <button 
+              type="button"
+              aria-label={languageButtonLabel}
+              aria-haspopup="menu"
+              aria-expanded={isLangOpen}
               onClick={() => setIsLangOpen(!isLangOpen)}
               className="w-full flex items-center justify-between p-4 bg-surface-container-high rounded-2xl border border-outline-variant/30 text-sm font-bold transition-all hover:bg-surface-container-highest group shadow-sm"
             >
@@ -153,11 +181,15 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
+                  role="menu"
                   className="absolute top-full left-0 right-0 mt-2 p-2 bg-white rounded-2xl border border-outline-variant shadow-2xl z-50 overflow-hidden"
                 >
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked={language === lang.code}
                       onClick={() => {
                         setLanguage(lang.code);
                         setIsLangOpen(false);
@@ -189,6 +221,9 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
               <button
                 key={item.id}
                 id={`nav-desktop-${item.id}`}
+                type="button"
+                aria-label={item.label}
+                aria-current={isActive ? 'page' : undefined}
                 onClick={() => setActiveTab(item.id)}
                 className={`flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all relative group ${
                   isActive 
@@ -201,6 +236,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
                 {isActive && (
                   <motion.div
                     layoutId="activeTabDesktop"
+                    aria-hidden="true"
                     className="absolute right-2 w-1.5 h-1.5 bg-white rounded-full"
                   />
                 )}
@@ -214,8 +250,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
             <p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Monitoramento</p>
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping absolute inset-0 opacity-75" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500 relative" />
+                <div aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping absolute inset-0 opacity-75" />
+                <div aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-green-500 relative" />
               </div>
               <span className="text-xs font-bold text-on-surface tracking-tight">{statusMap[language]}</span>
             </div>
