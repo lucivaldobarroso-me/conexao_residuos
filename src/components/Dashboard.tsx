@@ -174,16 +174,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectGroup, onOpenManua
       </section>
 
       <section className="overflow-hidden rounded-[28px] border border-primary/10 bg-white shadow-xl shadow-surface-container-highest/30 md:rounded-[32px]">
-        <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(320px,0.86fr)]">
-          <div className="min-w-0 p-5 md:p-8">
+        <div className="grid md:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.78fr)]">
+          <div className="min-w-0 p-5 md:p-8 md:pr-12">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-primary">
               <Trophy size={14} />
               {quiz.eyebrow}
             </div>
-            <h2 className="max-w-xl text-2xl font-black leading-tight text-on-surface sm:text-3xl md:text-[2.4rem]">
+            <h2 className="max-w-[12ch] text-2xl font-black leading-tight text-on-surface sm:text-3xl md:text-[2.45rem]">
               {quiz.title}
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-on-surface-variant">
+            <p className="mt-4 max-w-[34rem] text-base leading-relaxed text-on-surface-variant">
               {quiz.desc}
             </p>
 
@@ -213,21 +213,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectGroup, onOpenManua
 
           <div className="bg-primary p-5 text-white md:p-8">
             <div className="mx-auto max-w-sm rounded-[28px] bg-white/10 p-5 backdrop-blur">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-primary shadow-xl shadow-black/10">
-              <GraduationCap size={34} />
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {[5, 10, 15].map((count) => (
-                <div key={count} className="rounded-2xl bg-white/15 p-4">
-                  <p className="text-3xl font-black">{count}</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-white/75">Quiz</p>
-                </div>
-              ))}
-              <div className="rounded-2xl bg-white p-4 text-primary">
-                <p className="text-3xl font-black">Top</p>
-                <p className="text-xs font-bold uppercase tracking-widest">Ranking</p>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-primary shadow-xl shadow-black/10">
+                <GraduationCap size={34} />
               </div>
-            </div>
+              <div className="grid grid-cols-2 gap-3">
+                {[5, 10, 15].map((count) => (
+                  <div key={count} className="rounded-2xl bg-white/15 p-4">
+                    <p className="text-3xl font-black">{count}</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-white/75">Quiz</p>
+                  </div>
+                ))}
+                <div className="rounded-2xl bg-white p-4 text-primary">
+                  <p className="text-3xl font-black">Top</p>
+                  <p className="text-xs font-bold uppercase tracking-widest">Ranking</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

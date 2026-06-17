@@ -753,56 +753,56 @@ export const Quiz: React.FC<QuizProps> = ({ onComplete, language }) => {
           className="relative mb-8 aspect-[1.414/1] w-full overflow-hidden rounded-[18px] border border-primary/20 bg-white bg-cover bg-center text-left shadow-xl shadow-surface-container-highest/40"
           style={{ backgroundImage: "url('/images/certificate-background.png')" }}
         >
-          <div className="absolute inset-0 bg-white/72" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/74 to-white/58" />
+          <div className="absolute inset-0 bg-white/58" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/76 to-white/64" />
 
           <div className="relative flex h-full flex-col p-5 sm:p-7 md:p-10">
             <div className="flex items-start justify-between gap-4">
               <img
                 src="/images/site-slogan.jpg"
                 alt="Conexao Residuos"
-                className="h-14 w-28 rounded-xl border border-primary/10 bg-white object-cover shadow-sm sm:h-16 sm:w-32 md:h-24 md:w-48"
+                className="h-16 w-32 rounded-xl border border-primary/10 bg-white object-cover shadow-sm sm:h-18 sm:w-36 md:h-24 md:w-48"
               />
 
-              <div className="max-w-[62%] rounded-2xl border border-primary/15 bg-white/96 px-4 py-3 text-right shadow-lg backdrop-blur-sm md:px-6 md:py-4">
+              <div className="max-w-[62%] rounded-2xl border border-primary/15 bg-white/92 px-4 py-3 text-right shadow-lg backdrop-blur-sm md:px-6 md:py-4">
                 <p className="text-[9px] font-black uppercase tracking-widest text-primary md:text-xs">{t.certificateSubtitle}</p>
-                <h3 className="text-2xl font-black leading-tight text-on-surface md:text-4xl">{t.certificateTitle}</h3>
+                <h3 className="text-[1.8rem] font-black leading-tight text-on-surface md:text-[2.7rem]">{t.certificateTitle}</h3>
               </div>
             </div>
 
-            <div className="my-3 flex flex-1 flex-col justify-center rounded-3xl border border-primary/15 bg-white/78 p-4 shadow-xl shadow-primary/5 backdrop-blur-[2px] md:my-6 md:p-8">
+            <div className="my-3 flex flex-1 flex-col justify-center rounded-3xl border border-primary/15 bg-white/68 p-5 shadow-xl shadow-primary/5 backdrop-blur-[1px] md:my-6 md:p-9">
               <p className="text-[11px] font-black uppercase tracking-widest text-primary md:text-sm">{t.certificateIntro}</p>
-              <p className="mt-2 text-3xl font-black leading-tight text-on-surface drop-shadow-sm sm:text-4xl md:text-6xl">
+              <p className="mt-2 text-[2.2rem] font-black leading-[0.95] text-on-surface drop-shadow-sm sm:text-[2.8rem] md:text-[4.8rem]">
                 {participant?.participantName || 'Participante'}
               </p>
-              <p className="mt-4 max-w-4xl text-sm font-bold leading-relaxed text-on-surface sm:text-base md:mt-6 md:text-xl">
+              <p className="mt-4 max-w-4xl text-sm font-black leading-relaxed text-on-surface sm:text-base md:mt-6 md:text-[1.3rem]">
                 {t.certificateBody}
               </p>
 
-              <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-3 md:mt-8 md:gap-3">
-                <div className="rounded-xl border border-primary/15 bg-white/96 p-3 shadow-md backdrop-blur-sm md:rounded-2xl md:p-5">
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 md:mt-8">
+                <div className="rounded-xl border border-primary/15 bg-white/94 p-4 shadow-md backdrop-blur-sm md:rounded-2xl md:p-5">
                   <p className="text-[8px] font-black uppercase tracking-widest text-primary md:text-[10px]">{t.certificateProfessionLabel}</p>
-                  <p className="mt-1 truncate text-sm font-black text-on-surface md:text-base">{participant?.profession || '-'}</p>
+                  <p className="mt-1 truncate text-base font-black text-on-surface md:text-[1.1rem]">{participant?.profession || '-'}</p>
                 </div>
-                <div className="rounded-xl border border-primary/15 bg-white/96 p-3 shadow-md backdrop-blur-sm md:rounded-2xl md:p-5">
+                <div className="rounded-xl border border-primary/15 bg-white/94 p-4 shadow-md backdrop-blur-sm md:rounded-2xl md:p-5">
                   <p className="text-[8px] font-black uppercase tracking-widest text-primary md:text-[10px]">{t.certificateModeLabel}</p>
-                  <p className="mt-1 text-sm font-black text-on-surface md:text-base">
+                  <p className="mt-1 text-base font-black text-on-surface md:text-[1.1rem]">
                     {formatQuestionMode(selectedQuestionCount || currentQuiz.length, language)}
                   </p>
                 </div>
-                <div className="rounded-xl border border-primary/15 bg-white/96 p-3 shadow-md backdrop-blur-sm md:rounded-2xl md:p-5">
+                <div className="rounded-xl border border-primary/15 bg-white/94 p-4 shadow-md backdrop-blur-sm md:rounded-2xl md:p-5">
                   <p className="text-[8px] font-black uppercase tracking-widest text-primary md:text-[10px]">{t.certificateScoreLabel}</p>
-                  <p className="mt-1 text-sm font-black text-on-surface md:text-base">
+                  <p className="mt-1 text-base font-black text-on-surface md:text-[1.1rem]">
                     {Math.round((score / currentQuiz.length) * 100)}% ({score}/{currentQuiz.length})
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-2xl border border-primary/15 bg-white/88 px-4 py-3 shadow-md backdrop-blur-sm md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-2 rounded-2xl border border-primary/15 bg-white/84 px-4 py-3 shadow-md backdrop-blur-sm md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-xs font-bold text-on-surface md:text-sm">
-                {t.certificateDateLabel}: {certificateDate}
+                <p className="text-sm font-black text-on-surface md:text-base">
+                  {t.certificateDateLabel}: {certificateDate}
                 </p>
                 <p className="mt-1 text-[10px] leading-relaxed text-on-surface-variant md:text-xs">{t.certificateFooter}</p>
               </div>
