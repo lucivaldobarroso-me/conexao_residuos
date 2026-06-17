@@ -52,6 +52,22 @@ Execute no Supabase SQL Editor, na ordem:
 004_create_quiz_participants_attempts.sql
 005_create_quiz_public_stats_function.sql
 006_harden_quiz_data_access.sql
+007_create_admin_access.sql
+```
+
+## Area administrativa
+
+A area `Admin` usa login real pelo Supabase Auth e valida permissao pela tabela `public.admin_users`.
+
+Passos basicos:
+
+1. Crie o usuario administrador em `Authentication > Users`.
+2. Execute o SQL `007_create_admin_access.sql`.
+3. Cadastre o usuario como admin:
+
+```sql
+insert into public.admin_users (user_id, email)
+values ('UUID_DO_USUARIO_AUTH', 'seu-email@exemplo.com');
 ```
 
 ## Validacao

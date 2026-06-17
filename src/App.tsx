@@ -13,6 +13,7 @@ import { Scenarios } from './components/Scenarios';
 import { Quiz } from './components/Quiz';
 import { AboutProject } from './components/AboutProject';
 import { History } from './components/History';
+import { AdminPanel } from './components/AdminPanel';
 import { WASTE_DATA, UI_STRINGS } from './constants';
 import { WasteGroup, HistoryEntry, Language } from './types';
 import { loadHistoryEntries, persistHistoryEntries, readLocalHistory } from './services/historyRepository';
@@ -220,6 +221,8 @@ export default function App() {
             }} 
           />
         );
+      case 'admin':
+        return <AdminPanel />;
       case 'about':
         return (
           <AboutProject

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, ClipboardList, BookOpen, GraduationCap, Clock, Info, ChevronDown, Check } from 'lucide-react';
+import { Home, ClipboardList, BookOpen, GraduationCap, Clock, Info, ChevronDown, Check, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Language } from '../types';
 import { UI_STRINGS } from '../constants';
@@ -23,6 +23,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
     { id: 'groups', label: strings.groups, icon: ClipboardList },
     { id: 'scenarios', label: strings.scenarios, icon: BookOpen },
     { id: 'quiz', label: strings.quiz, icon: GraduationCap },
+    { id: 'admin', label: 'Admin', icon: Shield },
     { id: 'about', label: aboutLabel, icon: Info },
     { id: 'history', label: strings.history, icon: Clock },
   ];
