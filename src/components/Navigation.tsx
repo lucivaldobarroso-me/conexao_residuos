@@ -135,7 +135,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
 
       {/* Desktop Sidebar */}
       <nav id="desktop-sidebar" aria-label={navigationLabel} className="fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-outline-variant hidden md:flex flex-col p-6 z-40 shadow-sm">
-        <div className="hidden">
+        <div className="flex items-center gap-3 mb-10">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
             <ClipboardList size={24} />
           </div>
@@ -143,14 +143,6 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab,
             <h1 className="font-bold text-lg leading-tight text-on-surface">Conexão Resíduos</h1>
             <p className="text-[10px] uppercase font-bold tracking-widest text-primary/70 mt-0.5">Gestão em Saúde</p>
           </div>
-        </div>
-
-        <div className="mb-8 rounded-2xl border border-outline-variant bg-white p-2 shadow-sm">
-          <img
-            src="/images/site-slogan.jpg"
-            alt="Conexao Residuos - descarte consciente, saude garantida"
-            className="h-20 w-full rounded-xl object-cover"
-          />
         </div>
 
         <div className="mb-10">
