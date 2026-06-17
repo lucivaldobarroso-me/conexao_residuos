@@ -8,6 +8,10 @@ interface GroupsOverviewProps {
   onSelectGroup: (groupId: WasteGroup) => void;
   onSearch: (query: string) => void;
   language: Language;
+  externalSearch?: {
+    query: string;
+    nonce: number;
+  };
 }
 
 const colorMap: Record<string, string> = {
@@ -62,7 +66,7 @@ const translations = {
   }
 };
 
-export const GroupsOverview: React.FC<GroupsOverviewProps> = ({ onSelectGroup, onSearch, language }) => {
+export const GroupsOverview: React.FC<GroupsOverviewProps> = ({ onSelectGroup, onSearch, language, externalSearch }) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const t = translations[language];
 
@@ -74,6 +78,11 @@ export const GroupsOverview: React.FC<GroupsOverviewProps> = ({ onSelectGroup, o
       return () => clearTimeout(timer);
     }
   }, [searchQuery, onSearch]);
+
+  React.useEffect(() => {
+    if (!externalSearch) return;
+    setSearchQuery(externalSearch.query);
+  }, [externalSearch]);
 
   const filteredGroups = (Object.values(WASTE_DATA[language]) as WasteInfo[]).filter((group) => {
     const searchLower = searchQuery.toLowerCase();

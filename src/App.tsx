@@ -22,6 +22,8 @@ import { Bell, Search, Calendar } from 'lucide-react';
 export default function App() {
   const [activeTab, setActiveTab] = React.useState('dashboard');
   const [selectedGroupId, setSelectedGroupId] = React.useState<WasteGroup | null>(null);
+  const [headerSearchQuery, setHeaderSearchQuery] = React.useState('');
+  const [groupsSearchRequest, setGroupsSearchRequest] = React.useState({ query: '', nonce: 0 });
   const [language, setLanguage] = React.useState<Language>(() => {
     const saved = localStorage.getItem('rss_language');
     return (saved as Language) || 'pt';
@@ -122,6 +124,32 @@ export default function App() {
     window.requestAnimationFrame(scrollToPageTop);
   };
 
+  const handleHeaderSearch = () => {
+    const normalizedQuery = headerSearchQuery.trim();
+    if (!normalizedQuery) return;
+
+    setSelectedGroupId(null);
+    setGroupsSearchRequest((prev) => ({
+      query: normalizedQuery,
+      nonce: prev.nonce + 1,
+    }));
+    setActiveTab('groups');
+
+    addHistory(
+      language === 'pt' ? 'Busca Global' : language === 'en' ? 'Global Search' : 'Busqueda global',
+      language === 'pt'
+        ? `Voce buscou por "${normalizedQuery}" na navegacao principal.`
+        : language === 'en'
+          ? `You searched for "${normalizedQuery}" from the main search.`
+          : `Busco "${normalizedQuery}" desde la busqueda principal.`,
+      'Search',
+      'bg-slate-100 text-slate-700',
+      { targetTab: 'groups' }
+    );
+
+    window.requestAnimationFrame(scrollToPageTop);
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -153,6 +181,7 @@ export default function App() {
           <GroupsOverview 
             language={language}
             onSelectGroup={handleSelectGroup} 
+            externalSearch={groupsSearchRequest}
             onSearch={(query) => {
               addHistory(
                 language === 'pt' ? 'Busca Realizada' : language === 'en' ? 'Search Performed' : 'Búsqueda realizada',
@@ -249,6 +278,14 @@ export default function App() {
                 id="search-input"
                 type="text" 
                 aria-label={strings.search}
+                value={headerSearchQuery}
+                onChange={(event) => setHeaderSearchQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                    handleHeaderSearch();
+                  }
+                }}
                 placeholder={strings.search} 
                 className="bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 ring-primary/20 w-64"
               />
