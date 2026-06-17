@@ -11,9 +11,11 @@ import { GroupsOverview } from './components/GroupsOverview';
 import { ManualLibrary } from './components/ManualLibrary';
 import { Scenarios } from './components/Scenarios';
 import { Quiz } from './components/Quiz';
+import { AboutProject } from './components/AboutProject';
 import { History } from './components/History';
 import { WASTE_DATA, UI_STRINGS } from './constants';
 import { WasteGroup, HistoryEntry, Language } from './types';
+import { loadHistoryEntries, persistHistoryEntries, readLocalHistory } from './services/historyRepository';
 import { motion, AnimatePresence } from 'motion/react';
 import { Bell, Search, Calendar } from 'lucide-react';
 
@@ -25,13 +27,29 @@ export default function App() {
     return (saved as Language) || 'pt';
   });
   const [history, setHistory] = React.useState<HistoryEntry[]>(() => {
-    const saved = localStorage.getItem('rss_history');
-    return saved ? JSON.parse(saved) : [];
+    return readLocalHistory();
   });
+  const [isHistoryLoaded, setIsHistoryLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    localStorage.setItem('rss_history', JSON.stringify(history));
-  }, [history]);
+    let isActive = true;
+
+    loadHistoryEntries().then((entries) => {
+      if (isActive) {
+        setHistory(entries);
+        setIsHistoryLoaded(true);
+      }
+    });
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!isHistoryLoaded) return;
+    persistHistoryEntries(history);
+  }, [history, isHistoryLoaded]);
 
   React.useEffect(() => {
     localStorage.setItem('rss_language', language);
@@ -61,7 +79,7 @@ export default function App() {
     if (group) {
       addHistory(
         language === 'pt' ? `Consulta: ${group.title}` : language === 'en' ? `Query: ${group.title}` : `Consulta: ${group.title}`,
-        language === 'pt' ? `Você visualizou o protocolo completo do ${group.title}.` : language === 'en' ? `You viewed the full protocol for ${group.title}.` : `Has visto el protocolo completo de ${group.title}.`,
+        language === 'pt' ? `Você visualizou o protocolo completo do ${group.title}.` : language === 'en' ? `You viewed the full protocol for ${group.title}.` : `Consultó el protocolo completo de ${group.title}.`,
         'Search',
         'bg-primary/10 text-primary',
         { targetTab: 'groups', targetGroupId: id as WasteGroup }
@@ -69,6 +87,7 @@ export default function App() {
     }
     setSelectedGroupId(id as WasteGroup);
     setActiveTab('groups');
+    window.requestAnimationFrame(scrollToPageTop);
   };
 
   const strings = UI_STRINGS[language];
@@ -82,13 +101,25 @@ export default function App() {
     if (groupId && WASTE_DATA[language][groupId]) {
       setSelectedGroupId(groupId);
       setActiveTab('groups');
+      window.requestAnimationFrame(scrollToPageTop);
       return;
     }
 
     if (entry.targetTab) {
       setSelectedGroupId(null);
       setActiveTab(entry.targetTab);
+      window.requestAnimationFrame(scrollToPageTop);
     }
+  };
+
+  const scrollToPageTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
+  const handleSetActiveTab = (tab: string) => {
+    setActiveTab(tab);
+    if (tab !== 'groups') setSelectedGroupId(null);
+    window.requestAnimationFrame(scrollToPageTop);
   };
 
   const renderContent = () => {
@@ -98,11 +129,12 @@ export default function App() {
           <Dashboard
             language={language}
             onSelectGroup={handleSelectGroup}
-            onOpenManuals={() => setActiveTab('manuals')}
+            onOpenManuals={() => handleSetActiveTab('manuals')}
+            onOpenQuiz={() => handleSetActiveTab('quiz')}
           />
         );
       case 'manuals':
-        return <ManualLibrary language={language} onBack={() => setActiveTab('dashboard')} />;
+        return <ManualLibrary language={language} onBack={() => handleSetActiveTab('dashboard')} />;
       case 'groups':
         if (selectedGroupId && WASTE_DATA[language][selectedGroupId]) {
           return (
@@ -110,7 +142,10 @@ export default function App() {
               data={WASTE_DATA[language][selectedGroupId]} 
               language={language}
               onSelectGroup={handleSelectGroup}
-              onBack={() => setSelectedGroupId(null)} 
+              onBack={() => {
+                setSelectedGroupId(null);
+                window.requestAnimationFrame(scrollToPageTop);
+              }} 
             />
           );
         }
@@ -120,8 +155,8 @@ export default function App() {
             onSelectGroup={handleSelectGroup} 
             onSearch={(query) => {
               addHistory(
-                language === 'pt' ? 'Busca Realizada' : language === 'en' ? 'Search Performed' : 'Búsqueda Realizada',
-                language === 'pt' ? `Você buscou por "${query}" na classificação de resíduos.` : language === 'en' ? `You searched for "${query}" in waste classification.` : `Buscaste "${query}" en la clasificación de residuos.`,
+                language === 'pt' ? 'Busca Realizada' : language === 'en' ? 'Search Performed' : 'Búsqueda realizada',
+                language === 'pt' ? `Você buscou por "${query}" na classificação de resíduos.` : language === 'en' ? `You searched for "${query}" in waste classification.` : `Buscó "${query}" en la clasificación de residuos.`,
                 'Search',
                 'bg-slate-100 text-slate-700'
               );
@@ -135,7 +170,7 @@ export default function App() {
             onViewScenario={(title) => {
               addHistory(
                 language === 'pt' ? 'Navegação' : language === 'en' ? 'Navigation' : 'Navegación',
-                language === 'pt' ? `Você acessou a seção de ${title} para estudo prático.` : language === 'en' ? `You accessed the ${title} section for practical study.` : `Accediste a la sección de ${title} para estudio práctico.`,
+                language === 'pt' ? `Você acessou a seção de ${title} para estudo prático.` : language === 'en' ? `You accessed the ${title} section for practical study.` : `Accedió a la sección ${title} para estudio práctico.`,
                 'BookOpen',
                 'bg-blue-100 text-blue-700'
               );
@@ -148,12 +183,18 @@ export default function App() {
             language={language}
             onComplete={(score, total) => {
               addHistory(
-                language === 'pt' ? 'Desafio Concluído' : language === 'en' ? 'Challenge Completed' : 'Desafío Completado',
-                language === 'pt' ? `Você completou o Quiz com uma pontuação de ${Math.round((score / total) * 100)}% (${score}/${total}).` : language === 'en' ? `You completed the Quiz with a score of ${Math.round((score / total) * 100)}% (${score}/${total}).` : `Completaste el Cuestionario con una puntuación de ${Math.round((score / total) * 100)}% (${score}/${total}).`,
+                language === 'pt' ? 'Desafio Concluído' : language === 'en' ? 'Challenge Completed' : 'Desafío completado',
+                language === 'pt' ? `Você completou o Quiz com uma pontuação de ${Math.round((score / total) * 100)}% (${score}/${total}).` : language === 'en' ? `You completed the Quiz with a score of ${Math.round((score / total) * 100)}% (${score}/${total}).` : `Completó el quiz con un resultado de ${Math.round((score / total) * 100)}% (${score}/${total}).`,
                 'GraduationCap',
                 score / total >= 0.7 ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
               );
             }} 
+          />
+        );
+      case 'about':
+        return (
+          <AboutProject
+            language={language}
           />
         );
       case 'history':
@@ -170,27 +211,30 @@ export default function App() {
           <Dashboard
             language={language}
             onSelectGroup={handleSelectGroup}
-            onOpenManuals={() => setActiveTab('manuals')}
+            onOpenManuals={() => handleSetActiveTab('manuals')}
+            onOpenQuiz={() => handleSetActiveTab('quiz')}
           />
         );
     }
   };
 
   const locale = language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES';
+  const notificationLabel = language === 'pt' ? 'Notificacoes' : language === 'en' ? 'Notifications' : 'Notificaciones';
+
+  React.useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   return (
     <div className="min-h-screen bg-surface flex">
       <Navigation 
         activeTab={activeTab} 
-        setActiveTab={(tab) => {
-          setActiveTab(tab);
-          if (tab !== 'groups') setSelectedGroupId(null);
-        }} 
+        setActiveTab={handleSetActiveTab} 
         language={language}
         setLanguage={setLanguage}
       />
 
-      <main className="flex-1 md:ml-64 p-6 md:p-10 lg:p-12 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden px-4 pb-28 pt-24 sm:px-6 md:ml-64 md:p-10 lg:p-12">
         <header className="flex items-center justify-between mb-10 hidden md:flex">
           <div className="flex items-center gap-2 text-on-surface-variant">
             <Calendar size={18} />
@@ -204,13 +248,19 @@ export default function App() {
               <input 
                 id="search-input"
                 type="text" 
+                aria-label={strings.search}
                 placeholder={strings.search} 
                 className="bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 ring-primary/20 w-64"
               />
             </div>
-            <button id="notification-button" className="p-2 rounded-full hover:bg-surface-container-high transition-colors relative">
+            <button
+              id="notification-button"
+              type="button"
+              aria-label={notificationLabel}
+              className="p-2 rounded-full hover:bg-surface-container-high transition-colors relative"
+            >
               <Bell size={20} />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-surface" />
+              <span aria-hidden="true" className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-surface" />
             </button>
           </div>
         </header>

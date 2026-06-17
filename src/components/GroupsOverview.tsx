@@ -29,36 +29,36 @@ const borderMap: Record<string, string> = {
 const translations = {
   pt: {
     title: 'Classificação de Resíduos (RSS)',
-    subtitle: 'Selecione uma das categorias abaixo para acessar o protocolo completo de acondicionamento, riscos e descarte seguro.',
+    subtitle: 'Selecione uma das categorias abaixo para acessar critérios de identificação, acondicionamento, riscos e manejo seguro conforme a RDC 222/2018.',
     searchPlaceholder: 'Buscar grupo ou termo...',
     viewProtocol: 'Ver Protocolo Completo',
     noResults: 'Nenhum resultado encontrado',
     noResultsText: 'Não encontramos nenhum grupo de resíduos que corresponda a',
     clearSearch: 'Limpar busca',
     guidelineTitle: 'Diretriz Geral de Segregação',
-    guidelineText: 'Resíduos devem ser segregados no momento e local de sua geração. É expressamente proibido o transvasamento de resíduos entre recipientes para evitar riscos de acoplamento e perfuração acidental.'
+    guidelineText: 'Resíduos devem ser segregados no momento e local de sua geração, de acordo com o risco e o PGRSS. Evite transvasamento, mistura de resíduos incompatíveis e qualquer prática que aumente risco de vazamento, ruptura ou perfuração acidental.'
   },
   en: {
     title: 'Waste Classification (RSS)',
-    subtitle: 'Select one of the categories below to access the full protocol for packaging, risks, and safe disposal.',
+    subtitle: 'Select a category to access identification, packaging, risk, and safe management criteria according to RDC 222/2018.',
     searchPlaceholder: 'Search for group or term...',
     viewProtocol: 'View Full Protocol',
     noResults: 'No results found',
     noResultsText: 'No waste group matches your search for',
     clearSearch: 'Clear search',
     guidelineTitle: 'General Segregation Guideline',
-    guidelineText: 'Waste must be segregated at the time and place of generation. Transferring waste between containers is strictly prohibited to avoid accidental injury risks.'
+    guidelineText: 'Waste must be segregated at the time and place of generation, according to risk and the PGRSS. Avoid transferring waste, mixing incompatible materials, or any practice that increases leakage, rupture, or accidental puncture risk.'
   },
   es: {
     title: 'Clasificación de Residuos (RSS)',
-    subtitle: 'Seleccione una de las categorías a continuación para acceder al protocolo completo de acondicionado, riesgos y eliminación segura.',
+    subtitle: 'Seleccione una categoría para consultar criterios de identificación, acondicionamiento, riesgos y manejo seguro conforme a la RDC 222/2018.',
     searchPlaceholder: 'Buscar grupo o término...',
-    viewProtocol: 'Ver Protocolo Completo',
+    viewProtocol: 'Ver protocolo completo',
     noResults: 'No se encontraron resultados',
     noResultsText: 'No encontramos ningún grupo de residuos que coincida con',
     clearSearch: 'Limpiar búsqueda',
-    guidelineTitle: 'Directriz General de Segregación',
-    guidelineText: 'Los residuos deben segregarse en el momento y lugar de su generación. Está expresamente prohibido el trasvase de residuos entre recipientes para evitar riesgos de pinchazos accidentales.'
+    guidelineTitle: 'Directriz general de segregación',
+    guidelineText: 'Los residuos deben segregarse en el momento y en el lugar donde se generan, de acuerdo con el riesgo y el PGRSS. Evite trasvases, mezclas incompatibles y cualquier práctica que aumente el riesgo de fuga, ruptura o perforación accidental.'
   }
 };
 
@@ -128,10 +128,10 @@ export const GroupsOverview: React.FC<GroupsOverviewProps> = ({ onSelectGroup, o
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.2, delay: index * 0.05 }}
                 onClick={() => onSelectGroup(group.id as WasteGroup)}
-                className={`group flex flex-col bg-white rounded-[32px] border ${borderMap[group.id] || 'border-outline-variant'} overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all text-left relative`}
+              className={`group relative flex flex-col overflow-hidden rounded-[28px] border bg-white text-left transition-all hover:-translate-y-1 hover:shadow-2xl md:rounded-[32px] ${borderMap[group.id] || 'border-outline-variant'}`}
               >
                 <div className={`h-3 bg-gradient-to-r from-transparent ${colorMap[group.id]} to-transparent opacity-50`} />
-                <div className="p-8">
+                <div className="p-5 md:p-8">
                   <div className="flex items-center justify-between mb-6">
                     <div className={`w-14 h-14 rounded-2xl ${colorMap[group.id]} text-white flex items-center justify-center font-black text-2xl shadow-lg`}>
                       {group.id}
@@ -149,7 +149,7 @@ export const GroupsOverview: React.FC<GroupsOverviewProps> = ({ onSelectGroup, o
                     {group.description}
                   </p>
 
-                  <div className="mt-auto flex items-center gap-3 py-3 px-4 rounded-xl bg-surface-container-low text-[10px] font-bold uppercase tracking-widest text-primary">
+                  <div className="mt-auto flex items-center gap-2 rounded-xl bg-surface-container-low px-3 py-3 text-[10px] font-bold uppercase tracking-widest text-primary md:gap-3 md:px-4">
                     <ShieldCheck size={14} />
                     {t.viewProtocol}
                   </div>
@@ -180,7 +180,7 @@ export const GroupsOverview: React.FC<GroupsOverviewProps> = ({ onSelectGroup, o
         </AnimatePresence>
       </div>
 
-      <div className="p-8 rounded-[32px] bg-surface-container-high border border-outline-variant flex gap-6 items-start mt-8">
+      <div className="mt-6 flex flex-col gap-4 rounded-[28px] border border-outline-variant bg-surface-container-high p-5 sm:flex-row sm:items-start md:mt-8 md:gap-6 md:rounded-[32px] md:p-8">
         <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary shrink-0 shadow-sm">
           <Info size={24} />
         </div>

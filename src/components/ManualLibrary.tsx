@@ -10,12 +10,15 @@ interface ManualLibraryProps {
 
 const translations = {
   pt: {
-    title: 'Biblioteca de Manuais',
-    subtitle: 'Documentos técnicos e normas de referência para consulta sobre gerenciamento de resíduos de serviços de saúde.',
+    title: 'Biblioteca Normativa',
+    subtitle: 'Referências técnicas usadas para classificação, identificação, manejo e destinação dos Resíduos de Serviços de Saúde.',
     back: 'Voltar ao início',
     open: 'Abrir PDF',
     download: 'Baixar PDF',
     documents: 'Documentos disponíveis',
+    manualTitle: 'RDC Nº 222, de 28 de março de 2018',
+    manualDescription:
+      'Norma da ANVISA que regulamenta as Boas Práticas de Gerenciamento dos Resíduos de Serviços de Saúde, incluindo grupos A, B, C, D e E, PGRSS, segregação, acondicionamento, identificação, armazenamento, transporte e destinação.',
   },
   en: {
     title: 'Manual Library',
@@ -24,22 +27,25 @@ const translations = {
     open: 'Open PDF',
     download: 'Download PDF',
     documents: 'Available documents',
+    manualTitle: 'RDC No. 222, March 28, 2018',
+    manualDescription:
+      'ANVISA standard that regulates good practices for healthcare waste management, including Groups A, B, C, D, and E, PGRSS, segregation, packaging, identification, storage, transport, and final destination.',
   },
   es: {
-    title: 'Biblioteca de Manuales',
-    subtitle: 'Documentos técnicos y normas de referencia para la gestión de residuos de servicios de salud.',
+    title: 'Biblioteca normativa',
+    subtitle: 'Documentos técnicos y referencias normativas utilizados para clasificar, identificar, manejar y destinar residuos de servicios de salud.',
     back: 'Volver al inicio',
     open: 'Abrir PDF',
     download: 'Descargar PDF',
     documents: 'Documentos disponibles',
+    manualTitle: 'RDC n.º 222, de 28 de marzo de 2018',
+    manualDescription:
+      'Norma de ANVISA que reglamenta las buenas prácticas de gestión de los residuos de servicios de salud, incluidos los grupos A, B, C, D y E, el PGRSS, la segregación, el acondicionamiento, la identificación, el almacenamiento, el transporte y la destinación.',
   },
 };
 
 const manuals = [
   {
-    title: 'RDC Nº 222, de 28 de março de 2018',
-    description:
-      'Regulamenta as Boas Práticas de Gerenciamento dos Resíduos de Serviços de Saúde e dá outras providências.',
     href: '/manuals/rdc-222-2018.pdf',
   },
 ];
@@ -76,25 +82,25 @@ export const ManualLibrary: React.FC<ManualLibraryProps> = ({ language, onBack }
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white border border-outline-variant rounded-[32px] p-8 hover:shadow-xl transition-all"
+            className="rounded-[28px] border border-outline-variant bg-white p-5 transition-all hover:shadow-xl md:rounded-[32px] md:p-8"
           >
-            <div className="flex gap-5 items-start">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                 <FileText size={28} />
               </div>
 
               <div className="min-w-0">
-                <h3 className="text-xl font-bold text-on-surface mb-3">{manual.title}</h3>
+                <h3 className="text-xl font-bold text-on-surface mb-3">{t.manualTitle || 'RDC Nº 222, de 28 de março de 2018'}</h3>
                 <p className="text-sm text-on-surface-variant leading-relaxed mb-6">
-                  {manual.description}
+                  {t.manualDescription || 'Norma da ANVISA que regulamenta as Boas Práticas de Gerenciamento dos Resíduos de Serviços de Saúde, incluindo grupos A, B, C, D e E, PGRSS, segregação, acondicionamento, identificação, armazenamento, transporte e destinação.'}
                 </p>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <a
                     href={manual.href}
                     target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-2xl text-sm font-bold hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <ExternalLink size={18} />
                     {t.open}
@@ -102,7 +108,7 @@ export const ManualLibrary: React.FC<ManualLibraryProps> = ({ language, onBack }
                   <a
                     href={manual.href}
                     download
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-surface-container-high text-on-surface rounded-2xl text-sm font-bold hover:bg-surface-container-highest transition-all"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-surface-container-high px-5 py-3 text-sm font-bold text-on-surface transition-all hover:bg-surface-container-highest"
                   >
                     <Download size={18} />
                     {t.download}

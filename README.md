@@ -1,20 +1,75 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Conexao Residuos
 
-# Run and deploy your AI Studio app
+Site interativo para classificacao, consulta e treinamento sobre Residuos de Servicos de Saude (RSS), com conteudo baseado na RDC 222/2018.
 
-This contains everything you need to run your app locally.
+## Recursos
 
-View your app in AI Studio: https://ai.studio/apps/8787ccf2-422e-4ce9-a362-f187eaac27b2
+- Classificacao dos grupos A, B, C, D e E.
+- Consulta por cenarios praticos.
+- Biblioteca de manuais.
+- Quiz com participantes, ranking, estatisticas e certificado.
+- Integracao com Supabase para perguntas, participantes e tentativas.
+- Interface em portugues, espanhol e ingles.
 
-## Run Locally
+## Requisitos
 
-**Prerequisites:**  Node.js
+- Node.js 20 ou superior.
+- Projeto Supabase configurado.
 
+## Configuracao local
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Instale as dependencias:
+
+```bash
+npm install
+```
+
+2. Copie `.env.example` para `.env.local` e preencha:
+
+```bash
+VITE_SUPABASE_URL="https://seu-projeto.supabase.co"
+VITE_SUPABASE_ANON_KEY="sua-chave-anon-publica"
+```
+
+Use apenas a chave `anon public`. Nunca coloque `service_role` ou chaves privadas no frontend.
+
+3. Rode o projeto:
+
+```bash
+npm run dev
+```
+
+## Banco de dados
+
+Os scripts SQL ficam em `supabase/sql` e o arquivo consolidado fica em `supabase/schema.sql`.
+
+Execute no Supabase SQL Editor, na ordem:
+
+```text
+001_create_rss_history.sql
+002_create_questions.sql
+003_seed_questions.sql
+004_create_quiz_participants_attempts.sql
+005_create_quiz_public_stats_function.sql
+006_harden_quiz_data_access.sql
+```
+
+## Validacao
+
+Antes de publicar:
+
+```bash
+npm run lint
+npm run build
+```
+
+## Deploy
+
+Para Vercel, configure as variaveis de ambiente:
+
+```bash
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+```
+
+O arquivo `vercel.json` inclui cabecalhos basicos de seguranca.
