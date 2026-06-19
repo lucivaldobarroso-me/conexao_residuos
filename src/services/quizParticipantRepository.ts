@@ -32,7 +32,7 @@ function toLeaderboardEntry(row: AttemptRow): QuizLeaderboardEntry {
   return {
     id: row.id,
     participantName: row.participant_name || 'Participante',
-    profession: row.profession || 'Nao informado',
+    profession: row.profession || 'Não informado',
     cpfMask: row.cpf_mask || '***.***.***-**',
     score: row.score,
     totalQuestions: row.total_questions,
@@ -55,20 +55,20 @@ function getParticipantLookupError(error: unknown) {
   const message = error && typeof error === 'object' && 'message' in error ? String(error.message) : '';
 
   if (message.includes('find_quiz_participant_by_cpf_hash')) {
-    return 'Atualize o Supabase com o SQL 006 de seguranca antes de buscar cadastros.';
+    return 'Atualize o Supabase com o SQL 006 de segurança antes de buscar cadastros.';
   }
 
-  return 'Nao foi possivel buscar o cadastro.';
+  return 'Não foi possível buscar o cadastro.';
 }
 
 function getParticipantCreateError(error: unknown) {
   const message = error && typeof error === 'object' && 'message' in error ? String(error.message) : '';
 
   if (message.includes('create_quiz_participant')) {
-    return 'Atualize o Supabase com o SQL 006 de seguranca antes de criar cadastros.';
+    return 'Atualize o Supabase com o SQL 006 de segurança antes de criar cadastros.';
   }
 
-  return 'Nao foi possivel criar o cadastro.';
+  return 'Não foi possível criar o cadastro.';
 }
 
 function maskCpf(cpf: string) {
@@ -187,11 +187,11 @@ function toParticipant(row: ParticipantRow): QuizParticipant {
 
 export async function findParticipantByCpf(cpf: string): Promise<QuizParticipant | null> {
   if (!hasCpfLookupFormat(cpf)) {
-    throw new Error('Informe um CPF com 11 digitos validos.');
+    throw new Error('Informe um CPF com 11 dígitos válidos.');
   }
 
   if (!isSupabaseConfigured || !supabase) {
-    throw new Error('Supabase nao esta configurado.');
+    throw new Error('Supabase não está configurado.');
   }
 
   const cpfHash = await hashCpf(cpf);
@@ -216,15 +216,15 @@ export async function createParticipant(input: {
   const profession = input.profession.trim();
 
   if (!participantName || !profession) {
-    throw new Error('Informe nome e profissao.');
+    throw new Error('Informe nome e profissão.');
   }
 
   if (!hasCpfLookupFormat(input.cpf)) {
-    throw new Error('Informe um CPF com 11 digitos validos.');
+    throw new Error('Informe um CPF com 11 dígitos válidos.');
   }
 
   if (!isSupabaseConfigured || !supabase) {
-    throw new Error('Supabase nao esta configurado.');
+    throw new Error('Supabase não está configurado.');
   }
 
   const existingParticipant = await findParticipantByCpf(input.cpf);
@@ -244,7 +244,7 @@ export async function createParticipant(input: {
 
   const row = Array.isArray(data) ? data[0] : data;
   if (!row) {
-    throw new Error('Nao foi possivel criar o cadastro.');
+    throw new Error('Não foi possível criar o cadastro.');
   }
 
   return toParticipant(row as ParticipantRow);
@@ -272,7 +272,7 @@ export async function saveQuizAttempt(input: {
   });
 
   if (attemptError) {
-    throw new Error('Nao foi possivel salvar o resultado.');
+    throw new Error('Não foi possível salvar o resultado.');
   }
 
   const row = Array.isArray(data) ? data[0] : data;

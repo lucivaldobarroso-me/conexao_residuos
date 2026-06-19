@@ -321,6 +321,56 @@ function getEnglishFallbackQuestions(): QuizQuestion[] {
   }));
 }
 
+function restorePortugueseText(value: string) {
+  const replacements: Array<[RegExp, string]> = [
+    [/\bnao\b/gi, 'não'],
+    [/\bja\b/gi, 'já'],
+    [/\bpossivel\b/gi, 'possível'],
+    [/\bpresenca\b/gi, 'presença'],
+    [/\bbiologico\b/gi, 'biológico'],
+    [/\bbiologicos\b/gi, 'biológicos'],
+    [/\binfeccao\b/gi, 'infecção'],
+    [/\bclassificacao\b/gi, 'classificação'],
+    [/\bresiduos\b/gi, 'resíduos'],
+    [/\bservicos\b/gi, 'serviços'],
+    [/\bsaude\b/gi, 'saúde'],
+    [/\bquestao\b/gi, 'questão'],
+    [/\bquestoes\b/gi, 'questões'],
+    [/\bquimico\b/gi, 'químico'],
+    [/\bquimicos\b/gi, 'químicos'],
+    [/\bquimica\b/gi, 'química'],
+    [/\bradiologico\b/gi, 'radiológico'],
+    [/\bradiologicos\b/gi, 'radiológicos'],
+    [/\bradiologica\b/gi, 'radiológica'],
+    [/\bpublica\b/gi, 'pública'],
+    [/\blaboratorio\b/gi, 'laboratório'],
+    [/\banalises\b/gi, 'análises'],
+    [/\bradionuclideos\b/gi, 'radionuclídeos'],
+    [/\bisencao\b/gi, 'isenção'],
+    [/\banatomicas\b/gi, 'anatômicas'],
+    [/\bliquidos\b/gi, 'líquidos'],
+    [/\bcorporeos\b/gi, 'corpóreos'],
+    [/\bsecrecoes\b/gi, 'secreções'],
+    [/\bcontaminacao\b/gi, 'contaminação'],
+    [/\bcontaminados\b/gi, 'contaminados'],
+    [/\bcontaminadas\b/gi, 'contaminadas'],
+    [/\bperfurocortantes\b/gi, 'perfurocortantes'],
+    [/\bexplicacao\b/gi, 'explicação'],
+    [/\btecnica\b/gi, 'técnica'],
+    [/\bprevio\b/gi, 'prévio'],
+    [/\bprevia\b/gi, 'prévia'],
+    [/\bdisposicao\b/gi, 'disposição'],
+    [/\badequada\b/gi, 'adequada'],
+    [/\bpraticas\b/gi, 'práticas'],
+    [/\bprotecao\b/gi, 'proteção'],
+    [/\bmaos\b/gi, 'mãos'],
+    [/\bacionamento\b/gi, 'acionamento'],
+    [/\bpedal\b/gi, 'pedal'],
+  ];
+
+  return replacements.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value);
+}
+
 function toTranslatedQuizQuestion(row: QuestionRow, language: Extract<Language, 'es' | 'en'>): QuizQuestion {
   const translations = language === 'es' ? spanishQuestionTranslations : englishQuestionTranslations;
   const translatedQuestion = translations[row.title];
@@ -369,10 +419,14 @@ export async function loadQuizQuestions(language: Language): Promise<QuizQuestio
 
   return (data as QuestionRow[]).map((row) => ({
     id: row.id,
-    category: row.title,
-    question: row.question_text,
-    options: [row.option_a, row.option_b, row.option_c],
+    category: restorePortugueseText(row.title),
+    question: restorePortugueseText(row.question_text),
+    options: [
+      restorePortugueseText(row.option_a),
+      restorePortugueseText(row.option_b),
+      restorePortugueseText(row.option_c),
+    ],
     correctAnswer: optionToIndex[row.correct_option.toUpperCase()],
-    explanation: row.explanation,
+    explanation: restorePortugueseText(row.explanation),
   }));
 }

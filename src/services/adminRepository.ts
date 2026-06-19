@@ -68,7 +68,7 @@ interface AdminAttemptRow {
 
 function ensureSupabase() {
   if (!isSupabaseConfigured || !supabase) {
-    throw new Error('Supabase nao esta configurado.');
+    throw new Error('Supabase não está configurado.');
   }
   return supabase;
 }
@@ -116,7 +116,7 @@ export async function signInAdmin(email: string, password: string) {
   const client = ensureSupabase();
   const { error } = await client.auth.signInWithPassword({ email, password });
   if (error) {
-    throw new Error('Nao foi possivel entrar. Verifique email e senha.');
+    throw new Error('Não foi possível entrar. Verifique email e senha.');
   }
 }
 
@@ -129,7 +129,7 @@ export async function getAdminSession() {
   const client = ensureSupabase();
   const { data, error } = await client.auth.getSession();
   if (error) {
-    throw new Error('Nao foi possivel validar a sessao.');
+    throw new Error('Não foi possível validar a sessão.');
   }
   return data.session;
 }
@@ -147,7 +147,7 @@ export async function validateAdminAccess() {
   const client = ensureSupabase();
   const { data, error } = await client.rpc('is_current_admin');
   if (error) {
-    throw new Error('Nao foi possivel validar o acesso administrativo.');
+    throw new Error('Não foi possível validar o acesso administrativo.');
   }
   return Boolean(data);
 }
@@ -156,7 +156,7 @@ export async function loadAdminDashboard() {
   const client = ensureSupabase();
   const { data, error } = await client.rpc('get_admin_dashboard').maybeSingle();
   if (error || !data) {
-    throw new Error('Nao foi possivel carregar o painel administrativo.');
+    throw new Error('Não foi possível carregar o painel administrativo.');
   }
   return mapDashboard(data as AdminDashboardRow);
 }
@@ -167,7 +167,7 @@ export async function loadAdminParticipants(limit = 200) {
     p_limit: limit,
   });
   if (error) {
-    throw new Error('Nao foi possivel carregar os participantes.');
+    throw new Error('Não foi possível carregar os participantes.');
   }
   return ((data || []) as AdminParticipantRow[]).map(mapParticipant);
 }
@@ -178,7 +178,7 @@ export async function loadAdminAttempts(limit = 500) {
     p_limit: limit,
   });
   if (error) {
-    throw new Error('Nao foi possivel carregar as tentativas.');
+    throw new Error('Não foi possível carregar as tentativas.');
   }
   return ((data || []) as AdminAttemptRow[]).map(mapAttempt);
 }

@@ -139,10 +139,10 @@ export default function App() {
     addHistory(
       language === 'pt' ? 'Busca Global' : language === 'en' ? 'Global Search' : 'Busqueda global',
       language === 'pt'
-        ? `Voce buscou por "${normalizedQuery}" na navegacao principal.`
+        ? `Você buscou por "${normalizedQuery}" na navegação principal.`
         : language === 'en'
           ? `You searched for "${normalizedQuery}" from the main search.`
-          : `Busco "${normalizedQuery}" desde la busqueda principal.`,
+          : `Buscó "${normalizedQuery}" desde la búsqueda principal.`,
       'Search',
       'bg-slate-100 text-slate-700',
       { targetTab: 'groups' }
@@ -185,7 +185,7 @@ export default function App() {
             externalSearch={groupsSearchRequest}
             onSearch={(query) => {
               addHistory(
-                language === 'pt' ? 'Busca Realizada' : language === 'en' ? 'Search Performed' : 'Búsqueda realizada',
+                language === 'pt' ? 'Busca realizada' : language === 'en' ? 'Search Performed' : 'Búsqueda realizada',
                 language === 'pt' ? `Você buscou por "${query}" na classificação de resíduos.` : language === 'en' ? `You searched for "${query}" in waste classification.` : `Buscó "${query}" en la clasificación de residuos.`,
                 'Search',
                 'bg-slate-100 text-slate-700'
@@ -251,7 +251,7 @@ export default function App() {
   };
 
   const locale = language === 'pt' ? 'pt-BR' : language === 'en' ? 'en-US' : 'es-ES';
-  const notificationLabel = language === 'pt' ? 'Notificacoes' : language === 'en' ? 'Notifications' : 'Notificaciones';
+  const notificationLabel = language === 'pt' ? 'Notificações' : language === 'en' ? 'Notifications' : 'Notificaciones';
 
   React.useEffect(() => {
     document.documentElement.lang = locale;

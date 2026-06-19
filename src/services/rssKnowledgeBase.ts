@@ -13,45 +13,45 @@ const fallbackByGroup: Record<WasteGroup, RssKnowledgeAnswer> = {
   A: {
     id: 'a-fallback',
     group: 'A',
-    question: 'Nao encontrei uma resposta direta',
+    question: 'N?o encontrei uma resposta direta',
     answer:
-      'Nao encontrei uma resposta segura na base estruturada para esta duvida. Para o Grupo A, confirme o subgrupo A1 a A5, se ha tratamento obrigatorio, presenca de sangue ou liquidos corporeos na forma livre e o fluxo previsto no PGRSS da unidade.',
+      'N?o encontrei uma resposta segura na base estruturada para esta d?vida. Para o Grupo A, confirme o subgrupo A1 a A5, se h? tratamento obrigat?rio, presen?a de sangue ou l?quidos corp?reos na forma livre e o fluxo previsto no PGRSS da unidade.',
     reference: 'RDC 222/2018, Anexo I, Arts. 13 a 17 e Art. 55',
     keywords: [],
   },
   B: {
     id: 'b-fallback',
     group: 'B',
-    question: 'Nao encontrei uma resposta direta',
+    question: 'N?o encontrei uma resposta direta',
     answer:
-      'Nao encontrei uma resposta segura na base estruturada para esta duvida. Para o Grupo B, confira a periculosidade, FISPQ quando aplicavel, compatibilidade quimica, estado fisico e o PGRSS antes de acondicionar ou destinar o residuo.',
+      'N?o encontrei uma resposta segura na base estruturada para esta d?vida. Para o Grupo B, confira a periculosidade, FISPQ quando aplic?vel, compatibilidade quimica, estado f?sico e o PGRSS antes de acondicionar ou destinar o residuo.',
     reference: 'RDC 222/2018, Arts. 18, 19, 56, 57, 58 e 60',
     keywords: [],
   },
   C: {
     id: 'c-fallback',
     group: 'C',
-    question: 'Nao encontrei uma resposta direta',
+    question: 'N?o encontrei uma resposta direta',
     answer:
-      'Nao encontrei uma resposta segura na base estruturada para esta duvida. Para o Grupo C, o manejo deve seguir o Plano de Protecao Radiologica, normas da CNEN e orientacao do supervisor de protecao radiologica.',
+      'N?o encontrei uma resposta segura na base estruturada para esta d?vida. Para o Grupo C, o manejo deve seguir o Plano de Prote??o Radiol?gica, normas da CNEN e orienta??o do supervisor de prote??o radiol?gica.',
     reference: 'RDC 222/2018, Arts. 20, 33 e 72 a 79',
     keywords: [],
   },
   D: {
     id: 'd-fallback',
     group: 'D',
-    question: 'Nao encontrei uma resposta direta',
+    question: 'N?o encontrei uma resposta direta',
     answer:
-      'Nao encontrei uma resposta segura na base estruturada para esta duvida. Para o Grupo D, confirme se nao ha sinal ou suspeita de contaminacao biologica, quimica ou radiologica e siga o PGRSS e as orientacoes da limpeza urbana.',
+      'N?o encontrei uma resposta segura na base estruturada para esta d?vida. Para o Grupo D, confirme se n?o h? sinal ou suspeita de contamina??o biol?gica, qu?mica ou radiol?gica e siga o PGRSS e as orienta??es da limpeza urbana.',
     reference: 'RDC 222/2018, Arts. 21, 22 e 80 a 84',
     keywords: [],
   },
   E: {
     id: 'e-fallback',
     group: 'E',
-    question: 'Nao encontrei uma resposta direta',
+    question: 'N?o encontrei uma resposta direta',
     answer:
-      'Nao encontrei uma resposta segura na base estruturada para esta duvida. Para o Grupo E, trate como perfurocortante quando houver ponta, corte ou risco de escarificacao, e identifique tambem riscos biologicos, quimicos ou radiologicos associados.',
+      'N?o encontrei uma resposta segura na base estruturada para esta d?vida. Para o Grupo E, trate como perfurocortante quando houver ponta, corte ou risco de escarifica??o, e identifique tamb?m riscos biol?gicos, qu?micos ou radiol?gicos associados.',
     reference: 'RDC 222/2018, Arts. 86 a 89',
     keywords: [],
   },
@@ -64,7 +64,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'O que entra no Grupo A?',
       answer:
-        'Grupo A inclui residuos com possivel presenca de agentes biologicos que, por suas caracteristicas, podem apresentar risco de infeccao. A classificacao deve considerar os subgrupos A1 a A5.',
+        'Grupo A inclui res?duos com poss?vel presen?a de agentes biol?gicos que, por suas caracter?sticas, podem apresentar risco de infec??o. A classifica??o deve considerar os subgrupos A1 a A5.',
       reference: 'RDC 222/2018, Anexo I - Grupo A',
       keywords: ['grupo a', 'infectante', 'biologico', 'agente biologico', 'infeccao', 'subgrupo'],
     },
@@ -73,7 +73,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'Posso descartar luvas no Grupo A?',
       answer:
-        'Depende. Luvas com sangue, liquidos corporeos na forma livre, secrecoes ou suspeita de contaminacao biologica devem seguir o fluxo do risco biologico definido no PGRSS. Luvas sem sinais ou suspeita de contaminacao biologica, quimica ou radiologica podem ser manejadas como Grupo D.',
+        'Depende. Luvas com sangue, l?quidos corp?reos na forma livre, secre??es ou suspeita de contamina??o biol?gica devem seguir o fluxo do risco biol?gico definido no PGRSS. Luvas sem sinais ou suspeita de contamina??o biol?gica, qu?mica ou radiol?gica podem ser manejadas como Grupo D.',
       reference: 'RDC 222/2018, Anexo I - Grupo A e Art. 82',
       keywords: ['luva', 'luvas', 'descartar luva', 'descartar luvas', 'luva usada', 'luvas usadas', 'posso descartar luvas'],
     },
@@ -82,16 +82,16 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'Luva com sangue ou secrecao vai em qual grupo?',
       answer:
-        'Luvas com sangue, liquidos corporeos na forma livre, secrecoes ou suspeita de contaminacao biologica nao devem ir para lixo comum. Classifique pelo risco biologico e siga o fluxo do Grupo A previsto no PGRSS.',
+        'Luvas com sangue, l?quidos corp?reos na forma livre, secre??es ou suspeita de contamina??o biol?gica n?o devem ir para lixo comum. Classifique pelo risco biol?gico e siga o fluxo do Grupo A previsto no PGRSS.',
       reference: 'RDC 222/2018, Anexo I - Grupo A',
-      keywords: ['luva com sangue', 'luvas com sangue', 'secrecao', 'secrecoes', 'fluido', 'liquido corporeo', 'contaminada', 'contaminadas'],
+      keywords: ['luva com sangue', 'luvas com sangue', 'secrecao', 'secrecoes', 'fluido', 'l?quido corp?reo', 'contaminada', 'contaminadas'],
     },
     {
       id: 'a-white-bag',
       group: 'A',
       question: 'Quando usar saco branco leitoso?',
       answer:
-        'Use saco branco leitoso para RSS do Grupo A que nao precisam obrigatoriamente de tratamento e para RSS apos tratamento. Esses rejeitos devem seguir para disposicao final ambientalmente adequada.',
+        'Use saco branco leitoso para RSS do Grupo A que n?o precisam obrigatoriamente de tratamento e para RSS ap?s tratamento. Esses rejeitos devem seguir para disposi??o final ambientalmente adequada.',
       reference: 'RDC 222/2018, Art. 15',
       keywords: ['saco branco', 'branco leitoso', 'apos tratamento', 'sem tratamento', 'rejeito'],
     },
@@ -100,7 +100,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'Quando usar saco vermelho?',
       answer:
-        'Quando houver obrigacao de tratamento dos RSS do Grupo A, eles devem ser acondicionados em saco vermelho. O saco branco pode substituir em algumas regras locais de tratamento indiscriminado, exceto para o subgrupo A5.',
+        'Quando houver obriga??o de tratamento dos RSS do Grupo A, eles devem ser acondicionados em saco vermelho. O saco branco pode substituir em algumas regras locais de tratamento indiscriminado, exceto para o subgrupo A5.',
       reference: 'RDC 222/2018, Art. 16',
       keywords: ['saco vermelho', 'tratamento obrigatorio', 'autoclave', 'autoclavacao', 'tratar'],
     },
@@ -118,7 +118,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'Qual o limite de uso do saco do Grupo A?',
       answer:
-        'Os sacos do Grupo A devem ser substituidos ao atingir 2/3 da capacidade ou a cada 48 horas, independentemente do volume. Residuos de facil putrefacao devem ser substituidos em ate 24 horas.',
+        'Os sacos do Grupo A devem ser substitu?dos ao atingir 2/3 da capacidade ou a cada 48 horas, independentemente do volume. Res?duos de f?cil putrefa??o devem ser substitu?dos em at? 24 horas.',
       reference: 'RDC 222/2018, Art. 14',
       keywords: ['2/3', 'dois tercos', '48 horas', '24 horas', 'putrefacao', 'limite', 'encher'],
     },
@@ -136,7 +136,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'Culturas e placas de Petri podem sair sem tratamento?',
       answer:
-        'Culturas, estoques de microrganismos, meios de cultura e instrumentais usados para inoculacao/mistura de culturas pertencem ao subgrupo A1 e exigem fluxo de tratamento quando aplicavel antes de sair da unidade, conforme PGRSS.',
+        'Culturas, estoques de microrganismos, meios de cultura e instrumentais usados para inoculacao/mistura de culturas pertencem ao subgrupo A1 e exigem fluxo de tratamento quando aplic?vel antes de sair da unidade, conforme PGRSS.',
       reference: 'RDC 222/2018, Anexo I - Subgrupo A1 e Art. 16',
       keywords: ['cultura', 'placa', 'petri', 'meio de cultura', 'microorganismo', 'a1', 'laboratorio'],
     },
@@ -145,7 +145,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'A',
       question: 'Papel limpo ou embalagem limpa vai no Grupo A?',
       answer:
-        'Nao. Material sem sinal ou suspeita de contaminacao biologica, quimica ou radiologica pode ter manejo como Grupo D. Nao use o fluxo infectante para residuos limpos apenas por estarem em area de saude.',
+        'N?o. Material sem sinal ou suspeita de contamina??o biol?gica, qu?mica ou radiol?gica pode ter manejo como Grupo D. N?o use o fluxo infectante para res?duos limpos apenas por estarem em ?rea de sa?de.',
       reference: 'RDC 222/2018, Art. 82',
       keywords: ['papel limpo', 'embalagem limpa', 'invólucro', 'involucro', 'sem contaminacao', 'limpo'],
     },
@@ -163,47 +163,47 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
     {
       id: 'b-liquid',
       group: 'B',
-      question: 'Como acondicionar residuo quimico liquido?',
+      question: 'Como acondicionar residuo quimico l?quido?',
       answer:
-        'RSS liquidos devem ser acondicionados em recipiente compativel com o liquido, resistente, rigido, estanque, com tampa que garanta contencao e identificacao adequada.',
+        'RSS l?quidos devem ser acondicionados em recipiente compat?vel com o l?quido, resistente, rigido, estanque, com tampa que garanta contencao e identifica??o adequada.',
       reference: 'RDC 222/2018, Art. 18',
-      keywords: ['liquido', 'efluente', 'frasco', 'estanque', 'tampa', 'vazamento'],
+      keywords: ['l?quido', 'efluente', 'frasco', 'estanque', 'tampa', 'vazamento'],
     },
     {
       id: 'b-solid',
       group: 'B',
-      question: 'Como acondicionar residuo quimico solido?',
+      question: 'Como acondicionar residuo quimico s?lido?',
       answer:
-        'RSS quimicos solidos devem ser acondicionados em recipiente rigido, resistente, compativel com as caracteristicas do produto quimico e identificado conforme o risco.',
+        'RSS quimicos s?lidos devem ser acondicionados em recipiente rigido, resistente, compat?vel com as caracteristicas do produto quimico e identificado conforme o risco.',
       reference: 'RDC 222/2018, Art. 19',
-      keywords: ['solido', 'recipiente rigido', 'po', 'comprimido', 'medicamento vencido'],
+      keywords: ['s?lido', 'recipiente rigido', 'po', 'comprimido', 'medicamento vencido'],
     },
     {
       id: 'b-incompatible',
       group: 'B',
       question: 'Posso misturar residuos quimicos?',
       answer:
-        'Nao misture substancias quimicas incompatíveis. O acondicionamento deve observar incompatibilidades quimicas e separar riscos conforme PGRSS, FISPQ e anexos da RDC.',
+        'N?o misture subst?ncias quimicas incompatíveis. O acondicionamento deve observar incompatibilidades quimicas e separar riscos conforme PGRSS, FISPQ e anexos da RDC.',
       reference: 'RDC 222/2018, Art. 60 e Anexos III/IV',
-      keywords: ['misturar', 'mistura', 'incompativel', 'incompatibilidade', 'reagir', 'explodir', 'gases'],
+      keywords: ['misturar', 'mistura', 'incompat?vel', 'incompatibilidade', 'reagir', 'explodir', 'gases'],
     },
     {
       id: 'b-liquid-destination',
       group: 'B',
       question: 'Liquido quimico perigoso pode ir para aterro?',
       answer:
-        'Nao. RSS do Grupo B com periculosidade no estado liquido devem ser tratados antes da disposicao final, e e vedado encaminhar RSS liquido para disposicao final em aterros sanitarios.',
+        'N?o. RSS do Grupo B com periculosidade no estado l?quido devem ser tratados antes da disposi??o final, e ? vedado encaminhar RSS l?quido para disposi??o final em aterros sanit?rios.',
       reference: 'RDC 222/2018, Art. 58',
-      keywords: ['aterro', 'liquido perigoso', 'descarte liquido', 'pia', 'esgoto', 'tratamento'],
+      keywords: ['aterro', 'l?quido perigoso', 'descarte l?quido', 'pia', 'esgoto', 'tratamento'],
     },
     {
       id: 'b-solid-destination',
       group: 'B',
-      question: 'Qual destino para rejeito quimico solido perigoso?',
+      question: 'Qual destino para rejeito quimico s?lido perigoso?',
       answer:
-        'RSS do Grupo B no estado solido, com caracteristicas de periculosidade e considerados rejeitos, devem ser dispostos em aterro de residuos perigosos Classe I.',
+        'RSS do Grupo B no estado s?lido, com caracteristicas de periculosidade e considerados rejeitos, devem ser dispostos em aterro de residuos perigosos Classe I.',
       reference: 'RDC 222/2018, Art. 57',
-      keywords: ['classe i', 'aterro classe i', 'rejeito solido', 'solido perigoso'],
+      keywords: ['classe i', 'aterro classe i', 'rejeito s?lido', 's?lido perigoso'],
     },
     {
       id: 'b-medicine',
@@ -230,16 +230,16 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'C',
       question: 'O que entra no Grupo C?',
       answer:
-        'Grupo C inclui material que contenha radionuclideo em quantidade superior aos niveis de dispensa especificados pela CNEN, quando a reutilizacao e impropria ou nao prevista.',
+        'Grupo C inclui material que contenha radionucl?deo em quantidade superior aos n?veis de dispensa especificados pela CNEN, quando a reutiliza??o ? impr?pria ou n?o prevista.',
       reference: 'RDC 222/2018, Anexo I - Grupo C',
-      keywords: ['grupo c', 'radioativo', 'radionuclideo', 'radiacao', 'cnen', 'rejeito radioativo'],
+      keywords: ['grupo c', 'radioativo', 'radionucl?deo', 'radiacao', 'cnen', 'rejeito radioativo'],
     },
     {
       id: 'c-ppr',
       group: 'C',
       question: 'Quem define o manejo do rejeito radioativo?',
       answer:
-        'O gerenciamento do Grupo C deve obedecer ao Plano de Protecao Radiologica do servico, normas da CNEN e demais normas aplicaveis, com procedimentos definidos pelo supervisor de protecao radiologica.',
+        'O gerenciamento do Grupo C deve obedecer ao Plano de Prote??o Radiol?gica do servi?o, normas da CNEN e demais normas aplicaveis, com procedimentos definidos pelo supervisor de protecao radiologica.',
       reference: 'RDC 222/2018, Arts. 20 e 33',
       keywords: ['ppr', 'plano de protecao', 'supervisor', 'cnen', 'quem define', 'responsavel'],
     },
@@ -248,9 +248,9 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'C',
       question: 'Como segregar rejeitos radioativos?',
       answer:
-        'Rejeitos radioativos devem ser segregados por radionuclideo ou natureza da radiacao, estado fisico, concentracao e taxa de exposicao.',
+        'Rejeitos radioativos devem ser segregados por radionucl?deo ou natureza da radiacao, estado f?sico, concentracao e taxa de exposicao.',
       reference: 'RDC 222/2018, Art. 72',
-      keywords: ['segregar', 'radionuclideo', 'taxa de exposicao', 'concentracao', 'estado fisico'],
+      keywords: ['segregar', 'radionucl?deo', 'taxa de exposicao', 'concentracao', 'estado f?sico'],
     },
     {
       id: 'c-container',
@@ -275,7 +275,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'C',
       question: 'Perfurocortante radioativo pode ser separado?',
       answer:
-        'Perfurocortantes radioativos devem ser transportados ate o armazenamento para decaimento em recipiente blindado. E vedada a separacao do conjunto seringa-agulha com radionuclideos e o reencape manual.',
+        'Perfurocortantes radioativos devem ser transportados ate o armazenamento para decaimento em recipiente blindado. E vedada a separa??o do conjunto seringa-agulha com radionucl?deos e o reencape manual.',
       reference: 'RDC 222/2018, Art. 75',
       keywords: ['perfurocortante radioativo', 'agulha radioativa', 'seringa', 'blindado', 'reencape'],
     },
@@ -286,7 +286,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       answer:
         'O armazenamento para decaimento pode ocorrer na sala de manipulacao ou em sala especifica identificada como SALA DE DECAIMENTO. Liquidos exigem contenção ou absorcao com capacidade para o dobro do volume presente.',
       reference: 'RDC 222/2018, Art. 76',
-      keywords: ['decaimento', 'sala de decaimento', 'armazenar', 'liquido radioativo', 'bacia de contencao'],
+      keywords: ['decaimento', 'sala de decaimento', 'armazenar', 'l?quido radioativo', 'bacia de contencao'],
     },
     {
       id: 'c-release',
@@ -304,7 +304,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'D',
       question: 'O que entra no Grupo D?',
       answer:
-        'Grupo D inclui residuos que nao apresentam risco biologico, quimico ou radiologico a saude ou ao meio ambiente, podendo ser equiparados aos residuos domiciliares.',
+        'Grupo D inclui res?duos que n?o apresentam risco biol?gico, qu?mico ou radiol?gico ? sa?de ou ao meio ambiente, podendo ser equiparados aos res?duos domiciliares.',
       reference: 'RDC 222/2018, Anexo I - Grupo D',
       keywords: ['grupo d', 'comum', 'domiciliar', 'sem risco', 'lixo comum'],
     },
@@ -313,7 +313,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'D',
       question: 'EPI ou material de trabalho limpo pode ser Grupo D?',
       answer:
-        'Sim, artigos e materiais usados na area de trabalho, incluindo vestimentas e EPI, podem ter manejo como Grupo D desde que nao apresentem sinais ou suspeita de contaminacao quimica, biologica ou radiologica.',
+        'Sim, artigos e materiais usados na area de trabalho, incluindo vestimentas e EPI, podem ter manejo como Grupo D desde que n?o apresentem sinais ou suspeita de contamina??o qu?mica, biol?gica ou radiol?gica.',
       reference: 'RDC 222/2018, Art. 82',
       keywords: ['epi limpo', 'luva limpa', 'jaleco', 'mascara', 'sem contaminacao', 'vestimenta'],
     },
@@ -322,25 +322,25 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'D',
       question: 'Como acondicionar Grupo D?',
       answer:
-        'RSS do Grupo D devem ser acondicionados conforme orientacoes dos orgaos locais responsaveis pelo servico de limpeza urbana. Os sacos do Grupo D nao precisam de identificacao de RSS.',
+        'RSS do Grupo D devem ser acondicionados conforme orienta??es dos ?rg?os locais respons?veis pelo servi?o de limpeza urbana. Os sacos do Grupo D n?o precisam de identifica??o de RSS.',
       reference: 'RDC 222/2018, Arts. 21 e 22',
-      keywords: ['acondicionar', 'saco comum', 'identificacao', 'limpeza urbana', 'lixeira'],
+      keywords: ['acondicionar', 'saco comum', 'identifica??o', 'limpeza urbana', 'lixeira'],
     },
     {
       id: 'd-recyclable',
       group: 'D',
       question: 'Como lidar com reciclaveis limpos?',
       answer:
-        'Os procedimentos de segregacao, acondicionamento e identificacao dos coletores do Grupo D para reciclagem devem estar descritos no PGRSS.',
+        'Os procedimentos de segregacao, acondicionamento e identifica??o dos coletores do Grupo D para reciclagem devem estar descritos no PGRSS.',
       reference: 'RDC 222/2018, Art. 83',
-      keywords: ['reciclavel', 'papelao', 'papel', 'plastico limpo', 'coleta seletiva'],
+      keywords: ['recicl?vel', 'papelao', 'papel', 'plastico limpo', 'coleta seletiva'],
     },
     {
       id: 'd-compost',
       group: 'D',
       question: 'O que pode ir para compostagem?',
       answer:
-        'Podem ir para compostagem forracoes de animais de bioterios sem risco biologico associado, flores, podas, jardinagem, sobras de alimentos e restos alimentares de refeitórios ou de pacientes que nao estejam em isolamento.',
+        'Podem ir para compostagem forracoes de animais de biot?rios sem risco biologico associado, flores, podas, jardinagem, sobras de alimentos e restos alimentares de refeitórios ou de pacientes que n?o estejam em isolamento.',
       reference: 'RDC 222/2018, Art. 84',
       keywords: ['compostagem', 'resto alimentar', 'refeitorio', 'poda', 'jardinagem', 'forracao'],
     },
@@ -349,16 +349,16 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'D',
       question: 'Quando Grupo D vira rejeito?',
       answer:
-        'Quando nao encaminhado para reutilizacao, recuperacao, reciclagem, compostagem, logistica reversa ou aproveitamento energetico, o Grupo D deve ser classificado como rejeito.',
+        'Quando n?o encaminhado para reutiliza??o, recuperacao, reciclagem, compostagem, logistica reversa ou aproveitamento energetico, o Grupo D deve ser classificado como rejeito.',
       reference: 'RDC 222/2018, Art. 80',
-      keywords: ['rejeito', 'destino', 'disposicao final', 'nao reciclavel', 'aproveitamento'],
+      keywords: ['rejeito', 'destino', 'disposicao final', 'n?o recicl?vel', 'aproveitamento'],
     },
     {
       id: 'd-food-patient',
       group: 'D',
       question: 'Resto alimentar de paciente e Grupo D?',
       answer:
-        'Pode ser Grupo D quando nao houver risco biologico associado. Para compostagem, a RDC limita restos alimentares de pacientes aos que nao estejam em isolamento.',
+        'Pode ser Grupo D quando n?o houver risco biol?gico associado. Para compostagem, a RDC limita restos alimentares de pacientes aos que n?o estejam em isolamento.',
       reference: 'RDC 222/2018, Anexo I - Grupo D e Art. 84',
       keywords: ['resto alimentar', 'paciente', 'isolamento', 'alimento', 'sobras'],
     },
@@ -367,7 +367,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'D',
       question: 'Luvas ou gazes contaminadas podem ir para Grupo D?',
       answer:
-        'Nao, se houver sinais ou suspeita de contaminacao biologica, quimica ou radiologica, o material nao deve ser manejado como Grupo D. Classifique pelo risco presente.',
+        'N?o, se houver sinais ou suspeita de contamina??o biol?gica, qu?mica ou radiol?gica, o material n?o deve ser manejado como Grupo D. Classifique pelo risco presente.',
       reference: 'RDC 222/2018, Art. 82',
       keywords: ['luva contaminada', 'gaze', 'sangue', 'secrecao', 'contaminado'],
     },
@@ -414,7 +414,7 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'E',
       question: 'E se o perfurocortante tiver risco biologico, quimico ou radioativo?',
       answer:
-        'Quando contaminado por agentes biologicos, quimicos ou substancias radioativas, o Grupo E deve seguir o manejo de cada risco associado, e o recipiente deve conter a identificacao de todos os riscos presentes.',
+        'Quando contaminado por agentes biologicos, quimicos ou subst?ncias radioativas, o Grupo E deve seguir o manejo de cada risco associado, e o recipiente deve conter a identifica??o de todos os riscos presentes.',
       reference: 'RDC 222/2018, Art. 88',
       keywords: ['risco associado', 'quimico', 'biologico', 'radioativo', 'todos os riscos', 'misto'],
     },
@@ -423,16 +423,16 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
       group: 'E',
       question: 'Perfurocortante sem risco adicional precisa de tratamento?',
       answer:
-        'Seringas, agulhas e demais perfurocortantes sem risco quimico, biologico ou radiologico nao necessitam de tratamento previo a disposicao final ambientalmente adequada.',
+        'Seringas, agulhas e demais perfurocortantes sem risco quimico, biologico ou radiologico n?o necessitam de tratamento pr?vio ? disposi??o final ambientalmente adequada.',
       reference: 'RDC 222/2018, Art. 89',
-      keywords: ['sem risco', 'tratamento previo', 'disposicao final', 'agulha limpa', 'seringa'],
+      keywords: ['sem risco', 'tratamento pr?vio', 'disposicao final', 'agulha limpa', 'seringa'],
     },
     {
       id: 'e-recap',
       group: 'E',
       question: 'Pode reencapar ou desconectar agulha?',
       answer:
-        'Nao. A RDC veda reencape manual e desconexao manual de agulhas. A separacao do conjunto seringa-agulha so e permitida com auxilio de dispositivos de seguranca.',
+        'N?o. A RDC veda reencape manual e desconex?o manual de agulhas. A separa??o do conjunto seringa-agulha s? ? permitida com aux?lio de dispositivos de seguran?a.',
       reference: 'RDC 222/2018, Art. 89',
       keywords: ['reencapar', 'reencape', 'desconectar', 'separar agulha', 'seringa agulha'],
     },
@@ -448,11 +448,11 @@ export const rssKnowledgeBase: Record<WasteGroup, RssKnowledgeAnswer[]> = {
     {
       id: 'e-radioactive-sharp',
       group: 'E',
-      question: 'Agulha com radionuclideo pode ser separada?',
+      question: 'Agulha com radionucl?deo pode ser separada?',
       answer:
-        'Nao. Perfurocortante radioativo deve ser transportado para decaimento em recipiente blindado, sendo vedada a separacao do conjunto seringa-agulha contendo radionuclideos e o reencape manual.',
+        'N?o. Perfurocortante radioativo deve ser transportado para decaimento em recipiente blindado, sendo vedada a separa??o do conjunto seringa-agulha contendo radionucl?deos e o reencape manual.',
       reference: 'RDC 222/2018, Art. 75',
-      keywords: ['radionuclideo', 'radioativo', 'agulha radioativa', 'seringa radioativa', 'blindado'],
+      keywords: ['radionucl?deo', 'radioativo', 'agulha radioativa', 'seringa radioativa', 'blindado'],
     },
   ],
 };
@@ -462,6 +462,84 @@ function normalizeText(value: string) {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
+}
+
+function repairRssText(value: string) {
+  const replacements: Array<[RegExp, string]> = [
+    [/N\?o/g, 'Não'],
+    [/n\?o/g, 'não'],
+    [/d\?vida/g, 'dúvida'],
+    [/h\?/g, 'há'],
+    [/presen\?a/g, 'presença'],
+    [/poss\?vel/g, 'possível'],
+    [/res\?duos/g, 'resíduos'],
+    [/biol\?gicos/g, 'biológicos'],
+    [/biol\?gico/g, 'biológico'],
+    [/biol\?gica/g, 'biológica'],
+    [/qu\?micos/g, 'químicos'],
+    [/qu\?mico/g, 'químico'],
+    [/qu\?mica/g, 'química'],
+    [/radiol\?gicos/g, 'radiológicos'],
+    [/radiol\?gico/g, 'radiológico'],
+    [/radiol\?gica/g, 'radiológica'],
+    [/caracter\?sticas/g, 'características'],
+    [/infec\?\?o/g, 'infecção'],
+    [/classifica\?\?o/g, 'classificação'],
+    [/secre\?\?es/g, 'secreções'],
+    [/contamina\?\?o/g, 'contaminação'],
+    [/disposi\?\?o/g, 'disposição'],
+    [/obriga\?\?o/g, 'obrigação'],
+    [/orienta\?\?o/g, 'orientação'],
+    [/orienta\?\?es/g, 'orientações'],
+    [/identifica\?\?o/g, 'identificação'],
+    [/prote\?\?o/g, 'proteção'],
+    [/l\?quidos/g, 'líquidos'],
+    [/l\?quido/g, 'líquido'],
+    [/corp\?reos/g, 'corpóreos'],
+    [/corp\?reo/g, 'corpóreo'],
+    [/ap\?s/g, 'após'],
+    [/substitu\?dos/g, 'substituídos'],
+    [/f\?cil/g, 'fácil'],
+    [/putrefa\?\?o/g, 'putrefação'],
+    [/at\?/g, 'até'],
+    [/\?rea/g, 'área'],
+    [/sa\?de/g, 'saúde'],
+    [/subst\?ncias/g, 'substâncias'],
+    [/sanit\?rios/g, 'sanitários'],
+    [/radionucl\?deos/g, 'radionuclídeos'],
+    [/radionucl\?deo/g, 'radionuclídeo'],
+    [/n\?veis/g, 'níveis'],
+    [/reutiliza\?\?o/g, 'reutilização'],
+    [/impr\?pria/g, 'imprópria'],
+    [/servi\?o/g, 'serviço'],
+    [/\?rg\?os/g, 'órgãos'],
+    [/recicl\?vel/g, 'reciclável'],
+    [/pr\?vio/g, 'prévio'],
+    [/aux\?lio/g, 'auxílio'],
+    [/seguran\?a/g, 'segurança'],
+    [/\? vedado/g, 'é vedado'],
+    [/aplic\?vel/g, 'aplicável'],
+    [/f\?sico/g, 'físico'],
+    [/compat\?vel/g, 'compatível'],
+    [/incompat\?vel/g, 'incompatível'],
+    [/s\?lidos/g, 'sólidos'],
+    [/s\?lido/g, 'sólido'],
+    [/tamb\?m/g, 'também'],
+    [/\?\?/g, 'ç'],
+    [/\? /g, 'é '],
+  ];
+
+  return replacements.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), value);
+}
+
+function repairAnswer(answer: RssKnowledgeAnswer): RssKnowledgeAnswer {
+  return {
+    ...answer,
+    question: repairRssText(answer.question),
+    answer: repairRssText(answer.answer),
+    reference: repairRssText(answer.reference),
+    keywords: answer.keywords.map(repairRssText),
+  };
 }
 
 function scoreAnswer(answer: RssKnowledgeAnswer, normalizedQuestion: string) {
@@ -487,15 +565,15 @@ export function searchRssKnowledge(group: WasteGroup, question: string) {
   }
 
   if (group === 'A' && /\bluva(s)?\b/.test(normalizedQuestion)) {
-    const isContaminatedQuestion = /sangue|secrecao|secrecoes|fluido|liquido corporeo|contaminad/.test(normalizedQuestion);
+    const isContaminatedQuestion = /sangue|secrecao|secrecoes|fluido|l?quido corp?reo|liquido corporeo|contaminad/.test(normalizedQuestion);
     const answerId = isContaminatedQuestion ? 'a-gloves-contaminated' : 'a-gloves-depends';
-    return rssKnowledgeBase.A.find((answer) => answer.id === answerId) || fallbackByGroup.A;
+    return repairAnswer(rssKnowledgeBase.A.find((answer) => answer.id === answerId) || fallbackByGroup.A);
   }
 
   if (group === 'D' && /\bluva(s)?\b/.test(normalizedQuestion)) {
-    const isContaminatedQuestion = /sangue|secrecao|secrecoes|fluido|liquido corporeo|contaminad/.test(normalizedQuestion);
+    const isContaminatedQuestion = /sangue|secrecao|secrecoes|fluido|l?quido corp?reo|liquido corporeo|contaminad/.test(normalizedQuestion);
     const answerId = isContaminatedQuestion ? 'd-contaminated-gloves' : 'd-clean-gloves';
-    return rssKnowledgeBase.D.find((answer) => answer.id === answerId) || fallbackByGroup.D;
+    return repairAnswer(rssKnowledgeBase.D.find((answer) => answer.id === answerId) || fallbackByGroup.D);
   }
 
   const rankedAnswers = rssKnowledgeBase[group]
@@ -503,5 +581,5 @@ export function searchRssKnowledge(group: WasteGroup, question: string) {
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score);
 
-  return rankedAnswers[0]?.answer || fallbackByGroup[group];
+  return repairAnswer(rankedAnswers[0]?.answer || fallbackByGroup[group]);
 }

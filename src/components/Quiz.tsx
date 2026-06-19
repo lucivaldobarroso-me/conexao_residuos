@@ -13,7 +13,7 @@ interface QuizProps {
 
 const translations = {
   pt: {
-    completed: 'Quiz Completado!',
+    completed: 'Quiz concluído!',
     completedDesc: 'Você demonstrou seus conhecimentos em gestão de resíduos de saúde.',
     scoreLabel: 'Pontuação',
     correctLabel: 'Corretas',
@@ -21,8 +21,8 @@ const translations = {
     challengeTitle: 'Desafio RSS',
     questionLabel: 'Questão',
     ofLabel: 'de',
-    explanationTitle: 'Explicação Técnica:',
-    nextBtn: 'Próxima Questão',
+    explanationTitle: 'Explicação técnica:',
+    nextBtn: 'Próxima questão',
     resultBtn: 'Ver Resultado',
     chooseTitle: 'Escolha o tamanho do desafio',
     chooseDesc: 'As quest\u00f5es ser\u00e3o sorteadas aleatoriamente a cada tentativa.',
@@ -30,42 +30,42 @@ const translations = {
     availableLabel: 'quest\u00f5es dispon\u00edveis',
     identifyTitle: 'Identifica\u00e7\u00e3o do participante',
     identifyDesc: 'Use seu CPF para recuperar um cadastro existente ou crie um novo acesso.',
-    existingBtn: 'Ja tenho cadastro',
+    existingBtn: 'Já tenho cadastro',
     newBtn: 'Novo cadastro',
     nameLabel: 'Nome',
-    professionLabel: 'Profissao',
+    professionLabel: 'Profissão',
     cpfLabel: 'CPF',
     findBtn: 'Buscar cadastro',
     createBtn: 'Criar cadastro',
     participantLabel: 'Participante',
     attemptsLabel: 'tentativas anteriores',
     rankingTitle: 'Ranking da modalidade',
-    emptyRanking: 'Ainda nao ha ranking para esta quantidade.',
-    saveError: 'Nao foi possivel salvar o resultado no ranking.',
+    emptyRanking: 'Ainda não há ranking para esta quantidade.',
+    saveError: 'Não foi possível salvar o resultado no ranking.',
     statsTitle: 'Comunidade em treinamento',
-    statsDesc: 'Acompanhe quantas pessoas ja participaram do desafio e como esta o desempenho geral.',
+    statsDesc: 'Acompanhe quantas pessoas já participaram do desafio e como está o desempenho geral.',
     participantsStat: 'participantes',
     attemptsStat: 'respostas enviadas',
-    averageStat: 'media geral',
+    averageStat: 'média geral',
     topModeStat: 'modalidade mais escolhida',
     noTopMode: 'aguardando',
-    loadingQuestions: 'Carregando questoes...',
+    loadingQuestions: 'Carregando questões...',
     privacyTitle: 'Privacidade dos dados',
-    privacyText: 'Usamos nome e profissao para identificar o ranking. O CPF nao fica visivel: ele e transformado em codigo de seguranca e exibido apenas de forma mascarada.',
-    privacyConsent: 'Li e estou ciente do uso dos meus dados para cadastro, recuperacao de acesso e ranking do quiz.',
-    privacyRequired: 'Marque a ciencia sobre privacidade para continuar.',
-    rankingPreviewTitle: 'Consulte o ranking antes de comecar',
-    rankingPreviewDesc: 'Veja os melhores resultados por quantidade de questoes e escolha sua modalidade.',
+    privacyText: 'Usamos nome e profissão para identificar o ranking. O CPF não fica visível: ele é transformado em código de segurança e exibido apenas de forma mascarada.',
+    privacyConsent: 'Li e estou ciente do uso dos meus dados para cadastro, recuperação de acesso e ranking do quiz.',
+    privacyRequired: 'Marque a ciência sobre privacidade para continuar.',
+    rankingPreviewTitle: 'Consulte o ranking antes de começar',
+    rankingPreviewDesc: 'Veja os melhores resultados por quantidade de questões e escolha sua modalidade.',
     loadingRanking: 'Carregando ranking...',
-    certificateTitle: 'Certificado de Participacao',
+    certificateTitle: 'Certificado de participação',
     certificateSubtitle: 'Conexao Residuos | Quiz RSS',
     certificateIntro: 'Certificamos que',
-    certificateBody: 'concluiu o desafio de classificacao de Residuos de Servicos de Saude, com base educativa na RDC 222/2018.',
+    certificateBody: 'concluiu o desafio de classificação de Resíduos de Serviços de Saúde, com base educativa na RDC 222/2018.',
     certificateModeLabel: 'Modalidade',
     certificateScoreLabel: 'Resultado',
     certificateDateLabel: 'Data',
     certificateCpfLabel: 'CPF',
-    certificateProfessionLabel: 'Profissao',
+    certificateProfessionLabel: 'Profissão',
     certificateFooter: 'Documento educativo emitido automaticamente pelo site Conexao Residuos.',
     printCertificate: 'Imprimir certificado'
   },
@@ -205,7 +205,7 @@ function getLocale(language: Language) {
 function formatQuestionMode(count: number, language: Language) {
   if (language === 'en') return `${count} ${count === 1 ? 'question' : 'questions'}`;
   if (language === 'es') return `${count} ${count === 1 ? 'pregunta' : 'preguntas'}`;
-  return `${count} ${count === 1 ? 'questao' : 'questoes'}`;
+  return `${count} ${count === 1 ? 'questão' : 'questões'}`;
 }
 
 export const Quiz: React.FC<QuizProps> = ({ onComplete, language }) => {
@@ -357,12 +357,12 @@ export const Quiz: React.FC<QuizProps> = ({ onComplete, language }) => {
     try {
       const nextParticipant = await findParticipantByCpf(cpf);
       if (!nextParticipant) {
-        setParticipantError('Cadastro nao encontrado. Crie um novo cadastro para continuar.');
+        setParticipantError('Cadastro não encontrado. Crie um novo cadastro para continuar.');
         return;
       }
       setParticipant(nextParticipant);
     } catch (error) {
-      setParticipantError(error instanceof Error ? error.message : 'Nao foi possivel buscar o cadastro.');
+      setParticipantError(error instanceof Error ? error.message : 'Não foi possível buscar o cadastro.');
     } finally {
       setIsParticipantLoading(false);
     }
@@ -386,7 +386,7 @@ export const Quiz: React.FC<QuizProps> = ({ onComplete, language }) => {
       });
       setParticipant(nextParticipant);
     } catch (error) {
-      setParticipantError(error instanceof Error ? error.message : 'Nao foi possivel criar o cadastro.');
+      setParticipantError(error instanceof Error ? error.message : 'Não foi possível criar o cadastro.');
     } finally {
       setIsParticipantLoading(false);
     }
